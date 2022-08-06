@@ -68,9 +68,19 @@ export class UpdateAccountFormComponent implements OnInit {
       this.userService.UpdateAccount(url,body).subscribe(
         (r:any)=>{
           this.isLoading=false;
-          console.log(r);
-          this.storageService.SetCurrentUser=r.responseBody;
-          this.router.navigate(['/main']);
+          if(r.responseCode==1){
+            console.log(r);
+            this.storageService.SetCurrentUser=r.responseBody;
+            this.router.navigate(['/main']);
+          }
+          else{
+            this.Error={
+              error:{
+                error:r.responseMessage
+              }
+            }
+          }
+          
         },
         e=>{
           console.log('error => ',e)

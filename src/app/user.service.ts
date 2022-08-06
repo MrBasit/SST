@@ -33,7 +33,15 @@ export class UserService {
     }
     return this.http.put(url,body,options);
   }
-  DeleteAccount(url:string){
-    return this.http.delete(url);
+  DeleteAccount(url:string,reqbody:any){
+    this.Autorization=this.storageService.GetCurrentuesr.accessToken;
+    let header = new HttpHeaders(
+      {'Authorization':'Bearer '+this.Autorization}
+    );
+    let options = {
+      headers:header,
+      body:reqbody
+    }
+    return this.http.delete(url,options);
   }
 }

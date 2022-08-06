@@ -50,6 +50,9 @@
             <mat-error *ngIf="passwordFormControl?.hasError('required')">
             Password is <strong>required</strong>
             </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Minimum eight characters, At least one uppercase letter, At least one lowercase letter, At least one number, At least one special character
+            </mat-error>
         </mat-form-field>
         <p>need to <a [routerLink]="['/signin']">signin</a> ?
         <br>

@@ -30,8 +30,8 @@ export class ChangePasswordFormComponent implements OnInit {
 
   changePasswordForm=new FormGroup({
     currentPasswordFormControl:new FormControl('',[Validators.required]),
-    newPasswordFormControl:new FormControl('',[Validators.required]),
-    confirmPasswordFormControl:new FormControl('',[Validators.required]),
+    newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
+    confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
   })
 
   public get currentPasswordFormControl(){
@@ -46,6 +46,9 @@ export class ChangePasswordFormComponent implements OnInit {
 
   onSubmit(){
     this.isLoading=true;
+    if(this.newPasswordFormControl.value != this.confirmPasswordFormControl.value){
+      this.confirmPasswordFormControl.setErrors({'PasswordMismatch':true})
+    }
     if(this.changePasswordForm.valid){
       let url="http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/updatepassword";
       let body={
@@ -55,12 +58,19 @@ export class ChangePasswordFormComponent implements OnInit {
       }
       console.log('body -> ',body);
       this.userService.ChangePassword(url,body).subscribe(
-        r=>{
+        (r:any)=>{
           this.isLoading=false;
-          console.log(r);
-          
-          this.router.navigate(['/main']);
-
+          if(r.responseCode==1){
+            console.log(r);
+            this.router.navigate(['/main']);
+          }
+          else{
+            this.Error={
+              error:{
+                error:r.responseMessage
+              }
+            }
+          }
         },
         e=>{
           this.isLoading=false;
@@ -70,7 +80,8 @@ export class ChangePasswordFormComponent implements OnInit {
       )
     }
     else{
-      
+      console.log('invalid form')
+      this.isLoading=false;
     }
     console.log('form -> ',this.changePasswordForm.value);
   }

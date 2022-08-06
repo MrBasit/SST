@@ -20,25 +20,28 @@ export class MainFormComponent implements OnInit {
   }
 
   onSignoutClick(){
-        this.storageService.SetCurrentUser=null;
-        this.router.navigate(['/signin'])
+    this.storageService.SetCurrentUser=null;
+    this.router.navigate(['/signin'])
   }
 
   onDeleteAccountClick(){
     let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent,{
-      data:{Id:this.CurrentUser.id,Email:'a@a.com'}
+      data:null
     })
     DeleteDialogRef.afterClosed().subscribe(r=>{
       if(r){
-        this.storageService.SetCurrentUser=null;
         let url='http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/deleteaccount';
-        this.userService.DeleteAccount('').subscribe(r=>{
-          console.log(r),
-          this.router.navigate(['/signin'])
-        },
-        e=>{
-          console.log(e);
-        })
+        console.log('id: ',this.CurrentUser.id);
+        this.userService.DeleteAccount(url,{id:this.CurrentUser.id}).subscribe(
+          r=>{
+            this.storageService.SetCurrentUser=null;
+            console.log(r),
+            this.router.navigate(['/signin'])
+          },
+          e=>{
+            console.log(e);
+          }
+        )
       }
     })
   }
