@@ -1,0 +1,18 @@
+<div id="Header">
+    <h1>STS</h1>
+    <button mat-button [matMenuTriggerFor]="Menu">
+        {{(CurrentUser.username)?CurrentUser.username:CurrentUser.name}} <i class="material-icons">arrow_drop_down</i>
+    </button>
+    <mat-menu #Menu="matMenu" xPosition="before">
+        <button mat-menu-item [matMenuTriggerFor]="AccountMenu">Account</button>
+        <button (click)="onSignoutClick()" mat-menu-item>Sign Out</button>
+    </mat-menu>
+    <mat-menu #AccountMenu="matMenu">
+        <button routerLink="/changepassword"mat-menu-item>Change Password</button>
+        <button routerLink="/updateaccount" mat-menu-item>Update Account</button>
+        <button (click)="onDeleteAccountClick()" mat-menu-item>Delete Account</button>
+    </mat-menu>
+</div>
+
+<div id="body">
+</div>

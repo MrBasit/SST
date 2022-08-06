@@ -1,0 +1,9 @@
+#body{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#body button{
+    width: 25%;
+    height: 25vh;
+}

@@ -1,0 +1,34 @@
+<div *ngIf="isLoading" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<div id="Header">
+    <h1>STS</h1>
+</div>
+<div id="body">
+  <mat-error *ngIf="Error">
+    <span>{{Error.error.text}}</span>
+    <br>
+    <br>
+  </mat-error>
+    <form [formGroup]="loginFormControl" class="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="control" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" [formControl]="usernameFormControl" placeholder="Username001" name="usernameFormControl">
+          <mat-error *ngIf="usernameFormControl?.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [formControl]="passwordFormControl" placeholder="Your Passord" name="passwordFormControl">
+            <mat-error *ngIf="passwordFormControl?.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <p>need to <a [routerLink]="['/signup']">signup</a> ? | <a href="#">Forget Password</a></p>
+        <br>
+        <button class="submit-button" mat-raised-button type="submit" color="primary">Signin</button>
+    </form>
+</div>
+
