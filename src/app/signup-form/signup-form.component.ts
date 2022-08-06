@@ -55,7 +55,7 @@ export class SignupFormComponent implements OnInit {
       this.userService.Signup(url,body).subscribe(
         (r:any)=>{
             this.isLoading=false;
-            if(r.responseCode==2){
+            if(r.responseCode!=1){
             this.Error={
               error:{
                 error:r.responseMessage
