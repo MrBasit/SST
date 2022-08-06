@@ -43,7 +43,7 @@ export class SignupFormComponent implements OnInit {
     if(this.signupForm.valid){
       this.isLoading=true;
       console.log(this.signupForm.value);
-      let url="http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/signup";
+      let url="https://calm-hamlet-62154.herokuapp.com/user/signup";
       let body={
           username:this.signupForm.value['nameFormControl'],
           firstName:this.signupForm.value['firstnameFormControl'],

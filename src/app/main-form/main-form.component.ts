@@ -20,6 +20,10 @@ export class MainFormComponent implements OnInit {
   }
 
   onSignoutClick(){
+
+    let url='https://calm-hamlet-62154.herokuapp.com/user/logout';
+    this.userService.SignOut(url);
+
     this.storageService.SetCurrentUser=null;
     this.router.navigate(['/signin'])
   }
@@ -30,7 +34,7 @@ export class MainFormComponent implements OnInit {
     })
     DeleteDialogRef.afterClosed().subscribe(r=>{
       if(r){
-        let url='http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/deleteaccount';
+        let url='https://calm-hamlet-62154.herokuapp.com/user/deleteaccount';
         console.log('id: ',this.CurrentUser.id);
         this.userService.DeleteAccount(url,{id:this.CurrentUser.id}).subscribe(
           r=>{

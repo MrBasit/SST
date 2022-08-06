@@ -22,6 +22,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LocalstorageService } from './localstorage.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ForgotpasswordFormComponent } from './forgotpassword-form/forgotpassword-form.component';
+import {MatStepper, MatStepperModule, MatVerticalStepper} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SignupFormComponent,
     ChangePasswordFormComponent,
     UpdateAccountFormComponent,
-    DeleteAccountPopupComponent
+    DeleteAccountPopupComponent,
+    ForgotpasswordFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -48,6 +51,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
+    MatFormFieldModule,
     RouterModule.forRoot([
       {path:'',component:InitialFormComponent},
       {path:'signin',component:SigninFormComponent},
@@ -55,6 +60,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       {path:'main',component:MainFormComponent},
       {path:'changepassword',component:ChangePasswordFormComponent},
       {path:'updateaccount',component:UpdateAccountFormComponent},
+      {path:'forgotpassword',component:ForgotpasswordFormComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService],

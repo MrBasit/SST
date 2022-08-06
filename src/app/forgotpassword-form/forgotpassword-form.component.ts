@@ -5,19 +5,12 @@ import { LocalstorageService, User } from '../localstorage.service';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-change-password-form',
-  templateUrl: './change-password-form.component.html',
-  styleUrls: ['./change-password-form.component.css']
+  selector: 'app-forgotpassword-form',
+  templateUrl: './forgotpassword-form.component.html',
+  styleUrls: ['./forgotpassword-form.component.css']
 })
-export class ChangePasswordFormComponent implements OnInit {
-  // CurrentUser:User={
-  //   id:0,
-  //   username:'',
-  //   firstName:'',
-  //   lastName:'',
-  //   accessToken:'',
-  //   refreshToken:''
-  // };
+export class ForgotpasswordFormComponent implements OnInit {
+
   CurrentUser:any={}
   isLoading:boolean=false;
   Error:any=null;
@@ -27,21 +20,55 @@ export class ChangePasswordFormComponent implements OnInit {
   ngOnInit(): void {
     this.CurrentUser=this.storageService.GetCurrentuesr;
   }
-
-  changePasswordForm=new FormGroup({
+  
+  forgotPasswordForm=new FormGroup({
+    emailformControl:new FormControl('',[Validators.required]),
     currentPasswordFormControl:new FormControl('',[Validators.required]),
     newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
     confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
+  
   })
-
+  public get emailformControl(){
+    return this.forgotPasswordForm.get('emailformControl') as FormControl;
+  }
   public get currentPasswordFormControl(){
-    return this.changePasswordForm.get('currentPasswordFormControl') as FormControl;
+    return this.forgotPasswordForm.get('currentPasswordFormControl') as FormControl;
   }
   public get newPasswordFormControl(){
-    return this.changePasswordForm.get('newPasswordFormControl') as FormControl;
+    return this.forgotPasswordForm.get('newPasswordFormControl') as FormControl;
   }
   public get confirmPasswordFormControl(){
-    return this.changePasswordForm.get('confirmPasswordFormControl') as FormControl;
+    return this.forgotPasswordForm.get('confirmPasswordFormControl') as FormControl;
+  }
+
+  forgot(){
+    this.isLoading=true;
+    let url="https://calm-hamlet-62154.herokuapp.com/user/forgotpassword";
+      let body={
+          "email":this.forgotPasswordForm.value['emailformControl']
+      }
+
+      this.userService.ForgotPassword(url,body).subscribe(
+        (r:any)=>{
+          this.isLoading=false;
+          if(r.responseCode==1){
+            console.log(r);
+            
+          }
+          else{
+            this.Error={
+              error:{
+                error:r.responseMessage
+              }
+            }
+          }
+        },
+        e=>{
+          this.isLoading=false;
+          console.log('error => ',e)
+          this.Error=e;
+        }
+      )
   }
 
   onSubmit(){
@@ -49,20 +76,20 @@ export class ChangePasswordFormComponent implements OnInit {
     if(this.newPasswordFormControl.value != this.confirmPasswordFormControl.value){
       this.confirmPasswordFormControl.setErrors({'PasswordMismatch':true})
     }
-    if(this.changePasswordForm.valid){
-      let url="https://calm-hamlet-62154.herokuapp.com/user/updatepassword";
+    if(this.forgotPasswordForm.valid){
+      let url="https://calm-hamlet-62154.herokuapp.com/user/updateforgotpassword";
       let body={
-          "id":this.CurrentUser.id,
-          "currentPassword":this.changePasswordForm.value['currentPasswordFormControl'],
-          "newPassword":this.changePasswordForm.value['newPasswordFormControl']
+          "email":this.forgotPasswordForm.value['emailformControl'],
+          "currentPassword":this.forgotPasswordForm.value['currentPasswordFormControl'],
+          "newPassword":this.forgotPasswordForm.value['newPasswordFormControl']
       }
       console.log('body -> ',body);
-      this.userService.ChangePassword(url,body).subscribe(
+      this.userService.ChangeForgotPassword(url,body).subscribe(
         (r:any)=>{
           this.isLoading=false;
           if(r.responseCode==1){
             console.log(r);
-            this.router.navigate(['/main']);
+            this.router.navigate(['/signin']);
           }
           else{
             this.Error={
@@ -83,7 +110,6 @@ export class ChangePasswordFormComponent implements OnInit {
       console.log('invalid form')
       this.isLoading=false;
     }
-    console.log('form -> ',this.changePasswordForm.value);
+    console.log('form -> ',this.forgotPasswordForm.value);
   }
-
 }

@@ -58,7 +58,7 @@ export class UpdateAccountFormComponent implements OnInit {
   onSubmit(){
     this.isLoading=true;
     if(this.updateAccountForm.valid){
-      let url="http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/update";
+      let url="https://calm-hamlet-62154.herokuapp.com/user/update";
       let body={
           id:this.CurrentUser.id,
           username:this.updateAccountForm.value['nameFormControl'],

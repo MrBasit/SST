@@ -23,6 +23,18 @@ export class UserService {
     }
     return this.http.put(url,body,options);
   }
+
+  ForgotPassword(url:string,body:{}){
+    
+    return this.http.put(url,body);
+  }
+
+  ChangeForgotPassword(url:string,body:{}){
+    
+    return this.http.put(url,body);
+  }
+
+
   UpdateAccount(url:string,body:{}){
     this.Autorization=this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(
@@ -43,5 +55,15 @@ export class UserService {
       body:reqbody
     }
     return this.http.delete(url,options);
+  }
+  SignOut(url:string){
+    this.Autorization=this.storageService.GetCurrentuesr.accessToken;
+    let header = new HttpHeaders(
+      {'Authorization':'Bearer '+this.Autorization}
+    );
+    let options = {
+      headers:header
+    }
+    return this.http.get(url,options);
   }
 }
