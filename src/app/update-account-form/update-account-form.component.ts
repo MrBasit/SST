@@ -14,8 +14,9 @@ export class UpdateAccountFormComponent implements OnInit {
   isLoading:boolean=false;
   Error:any=null;
   CurrentUser:User={
-    "id": 0,
+  "id": 0,
   "username": '',
+  "email":'',
   "firstName": '',
   "lastName": '',
   "accessToken": '',
@@ -47,11 +48,12 @@ export class UpdateAccountFormComponent implements OnInit {
     return this.updateAccountForm.controls['emailFormControl'] as FormControl;
   }
   ngOnInit(): void {
+    
     this.CurrentUser=this.storageService.GetCurrentuesr;
     this.nameFormControl.setValue(this.CurrentUser.username);
     this.firstnameFormControl.setValue(this.CurrentUser.firstName);
     this.lastnameFormControl.setValue(this.CurrentUser.lastName)
-    this.emailFormControl.setValue('itechnician030@gmail.com')
+    this.emailFormControl.setValue(this.CurrentUser.email)
   }
   onSubmit(){
     this.isLoading=true;
@@ -59,7 +61,7 @@ export class UpdateAccountFormComponent implements OnInit {
       let url="http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/update";
       let body={
           id:this.CurrentUser.id,
-          name:this.updateAccountForm.value['nameFormControl'],
+          username:this.updateAccountForm.value['nameFormControl'],
           firstName:this.updateAccountForm.value['firstnameFormControl'],
           lastName:this.updateAccountForm.value['lastnameFormControl'],
           email:this.updateAccountForm.value['emailFormControl']
@@ -70,7 +72,14 @@ export class UpdateAccountFormComponent implements OnInit {
           this.isLoading=false;
           if(r.responseCode==1){
             console.log(r);
-            this.storageService.SetCurrentUser=r.responseBody;
+            
+            this.CurrentUser.email=r.responseBody.email;
+            this.CurrentUser.username=r.responseBody.username;
+            this.CurrentUser.firstName=r.responseBody.firstName;
+            this.CurrentUser.lastName=r.responseBody.lastName;
+            this.CurrentUser.accessToken=this.storageService.GetCurrentuesr.accessToken;
+            this.CurrentUser.refreshToken=this.storageService.GetCurrentuesr.refreshToken;
+            this.storageService.SetCurrentUser=this.CurrentUser;
             this.router.navigate(['/main']);
           }
           else{

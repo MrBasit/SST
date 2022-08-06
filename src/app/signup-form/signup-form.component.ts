@@ -45,7 +45,7 @@ export class SignupFormComponent implements OnInit {
       console.log(this.signupForm.value);
       let url="http://stackholder-env.eba-ku4mxseq.ap-south-1.elasticbeanstalk.com/user/signup";
       let body={
-          name:this.signupForm.value['nameFormControl'],
+          username:this.signupForm.value['nameFormControl'],
           firstName:this.signupForm.value['firstnameFormControl'],
           lastName:this.signupForm.value['lastnameFormControl'],
           email:this.signupForm.value['emailFormControl'],

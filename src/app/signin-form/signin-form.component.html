@@ -13,7 +13,7 @@
     <form [formGroup]="loginFormControl" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="control" appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput type="text" [formControl]="usernameFormControl" placeholder="Username001" name="usernameFormControl">
+          <input matInput type="text" [formControl]="usernameFormControl" placeholder="Username" name="usernameFormControl">
           <mat-error *ngIf="usernameFormControl?.hasError('required')">
             Email is <strong>required</strong>
           </mat-error>
@@ -26,7 +26,7 @@
               Password is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        <p>need to <a [routerLink]="['/signup']">signup</a> ? | <a href="#">Forget Password</a></p>
+        <p>need to <a [routerLink]="['/signup']">signup</a> ? | <a [routerLink]="['/signin']">Forget Password</a></p>
         <br>
         <button class="submit-button" mat-raised-button type="submit" color="primary">Signin</button>
     </form>
