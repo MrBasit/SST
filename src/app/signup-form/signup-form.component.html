@@ -10,11 +10,16 @@
         <br>
         <br>
     </mat-error>
+    <mat-error *ngIf="Error2">
+        <span>{{Error2?.error?.error}}</span>
+        <br>
+        <br>
+    </mat-error>
     <p *ngIf="isSignupSuccessfull">Signup Successfull, go to <a [routerLink]="['/signin']">signin</a> Page</p>
     <form *ngIf="!isSignupSuccessfull" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="control" appearance="fill">
             <mat-label>Name</mat-label>
-            <input matInput type="text" [formControl]="nameFormControl" placeholder="Username">
+            <input matInput type="text" [formControl]="nameFormControl" placeholder="Username" (ngModelChange)="checkUsername()">
             <mat-error *ngIf="nameFormControl?.hasError('required')">
                 Name is <strong>required</strong>
             </mat-error>
@@ -38,7 +43,7 @@
             <br>
             <mat-form-field class="control" appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput type="email" [formControl]="emailFormControl" placeholder="any@mail.com">
+            <input matInput type="email" [formControl]="emailFormControl" placeholder="any@mail.com" (ngModelChange)="checkemail()">
             <mat-error *ngIf="emailFormControl?.hasError('required')">
             Email is <strong>required</strong>
             </mat-error>
@@ -56,6 +61,10 @@
         </mat-form-field>
         <p>need to <a [routerLink]="['/signin']">signin</a> ?
         <br>
+        <mat-error *ngIf="AboveError">
+            <br>
+        <span> Please Fix the Above <strong>Errors</strong></span>
+        </mat-error>
         <br>
         <button class="submit-button" mat-raised-button type="submit" color="primary">Signup</button>
     </form>
