@@ -14,8 +14,8 @@ export class SigninFormComponent implements OnInit {
 
   constructor(public userService:UserService,public router:Router, public storageService:LocalstorageService) { }
   loginFormControl=new FormGroup({
-    usernameFormControl:new FormControl('',[Validators.required]),
-    passwordFormControl:new FormControl('',[Validators.required])
+    usernameFormControl:new FormControl('itechnician030@gmail.com',[Validators.required]),
+    passwordFormControl:new FormControl('Aa@123456',[Validators.required])
   })
   public get usernameFormControl(){
     return this.loginFormControl.get('usernameFormControl') as FormControl;

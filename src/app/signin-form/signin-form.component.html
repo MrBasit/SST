@@ -1,9 +1,7 @@
 <div *ngIf="isLoading" class="loader">
   <mat-spinner></mat-spinner>
 </div>
-<div id="Header">
-    <h1>STS</h1>
-</div>
+<app-initial-header></app-initial-header>
 <div id="body">
   <mat-error *ngIf="Error">
     <span>{{Error.error.text}}</span>
@@ -12,7 +10,7 @@
   </mat-error>
     <form [formGroup]="loginFormControl" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="control" appearance="fill">
-          <mat-label>Email</mat-label>
+          <!-- <mat-label>Email/User Name</mat-label> -->
           <input matInput type="text" [formControl]="usernameFormControl" placeholder="Username" name="usernameFormControl">
           <mat-error *ngIf="usernameFormControl?.hasError('required')">
             Email is <strong>required</strong>

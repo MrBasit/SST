@@ -24,6 +24,7 @@ import { LocalstorageService } from './localstorage.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForgotpasswordFormComponent } from './forgotpassword-form/forgotpassword-form.component';
 import {MatStepper, MatStepperModule, MatVerticalStepper} from '@angular/material/stepper';
+import { InitialHeaderComponent } from './initial-header/initial-header.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatStepper, MatStepperModule, MatVerticalStepper} from '@angular/materia
     UpdateAccountFormComponent,
     DeleteAccountPopupComponent,
     ForgotpasswordFormComponent,
+    InitialHeaderComponent,
   ],
   imports: [
     HttpClientModule,

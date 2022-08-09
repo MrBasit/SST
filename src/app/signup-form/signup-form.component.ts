@@ -22,7 +22,7 @@ export class SignupFormComponent implements OnInit {
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required]),
+    emailFormControl:new FormControl('',[Validators.required,Validators.email]),
     passwordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
   public get firstnameFormControl(){
@@ -156,7 +156,7 @@ export class SignupFormComponent implements OnInit {
   
       }
       else{
-        console.log('invalid form')
+        console.log('invalid form ',this.signupForm )
       }
     }
 
