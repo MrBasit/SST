@@ -13,6 +13,9 @@ export class UserService {
   Signin(url:string,body:any){
     return this.http.post(url,body);
   }
+  Awake(url:string){
+    return this.http.get(url);
+  }
   ChangePassword(url:string,body:{}){
     this.Autorization=this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(

@@ -1,5 +1,8 @@
+<div *ngIf="isLoading" class="loader">
+    <mat-spinner></mat-spinner>
+  </div>
 <div id="Header">
-    <h1>SST</h1>
+    <h3>StackHolder Specification Tool</h3>
     <button mat-button [matMenuTriggerFor]="Menu">
         {{(CurrentUser.username)?CurrentUser.username:CurrentUser.name}} <i class="material-icons">arrow_drop_down</i>
     </button>

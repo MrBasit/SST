@@ -18,14 +18,15 @@ export class MainFormComponent implements OnInit {
   ngOnInit(): void {
     this.CurrentUser = this.storageService.GetCurrentuesr;
   }
+  isLoading:boolean=false;
 
   onSignoutClick(){
-
-    let url='https://calm-hamlet-62154.herokuapp.com/user/logout';
+    this.isLoading=true;
+    let url='http://localhost:5000/user/logout';
     this.userService.SignOut(url);
-
     this.storageService.SetCurrentUser=null;
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/'])
+    
   }
 
   onDeleteAccountClick(){
@@ -34,6 +35,7 @@ export class MainFormComponent implements OnInit {
     })
     DeleteDialogRef.afterClosed().subscribe(r=>{
       if(r){
+        this.isLoading=true;
         let url='https://calm-hamlet-62154.herokuapp.com/user/deleteaccount';
         console.log('id: ',this.CurrentUser.id);
         this.userService.DeleteAccount(url,{id:this.CurrentUser.id}).subscribe(

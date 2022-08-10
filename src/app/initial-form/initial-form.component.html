@@ -1,8 +1,17 @@
 <app-initial-header></app-initial-header>
+<div *ngIf="isLoading" class="loader">
+    <mat-spinner></mat-spinner>
+</div>
 <div id="body">
-    <div class="title"><h1>Stakeholder Specification Tool</h1></div>
+    <div class="title">
+        <span>
+            <h3>Welcome to this Amazing Product</h3>
+            <br>
+            <h4>Please join us (Sign Up) or Sign In to get started</h4>
+        </span>
+        </div>
     <div class="buttons">
-        <button routerLink="/signup" mat-raised-button color="primary">Signup</button>
-        <button routerLink="/signin" mat-raised-button color="primary">Signin</button>
+        <button routerLink="/signup" mat-raised-button color="primary">Sign Up</button>
+        <button routerLink="/signin" mat-raised-button color="primary">Sign In</button>
     </div>
 </div>
