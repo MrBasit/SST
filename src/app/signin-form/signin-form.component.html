@@ -12,7 +12,7 @@
     <br>
   </mat-error>
     <form [formGroup]="loginFormControl" class="form" (ngSubmit)="onSubmit()">
-      <div fxLayoutAlign="center">  
+        
       <mat-form-field class="control" appearance="fill">
           <!-- <mat-label>Email/User Name</mat-label> -->
           <input matInput type="text" [formControl]="usernameFormControl" placeholder="Email/UserName" name="usernameFormControl">
@@ -20,9 +20,7 @@
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-      </div>
         <br>
-        <div fxLayoutAlign="center">
         <mat-form-field class="control" appearance="fill">
             <mat-label>Password</mat-label>
             <input matInput type="password" [formControl]="passwordFormControl" placeholder="Your Password" name="passwordFormControl">
@@ -30,7 +28,6 @@
               Password is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        </div>  
         <br>
         <span style="text-align: center;">
           <p>Don't have account yet? <a [routerLink]="['/signup']">Sign Up</a>
@@ -40,9 +37,7 @@
         </span>
         <br>
         <br>
-        <div fxLayoutAlign="center">
         <button class="submit-button" mat-raised-button type="submit" color="primary">Sign In</button>
-      </div>
     </form>
 </div>
 

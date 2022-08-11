@@ -3,6 +3,7 @@
 </div>
 <app-initial-header></app-initial-header>
 <div id="body" fxLayout="column" fxLayoutAlign="center"  style="overflow: auto;height: 100%;">
+    <div style="width: 80%; align-items: center; flex-direction: column; display: flex;">
     <h2>Sign Up</h2>
     <br>
     <mat-error [hidden]="!Error" style="font-size: 13px;">
@@ -13,7 +14,8 @@
         <span>{{Error2?.error?.error}}</span>
     </mat-error>
     <br>
-    <p *ngIf="isSignupSuccessfull">Sign Up Successful, go to <a [routerLink]="['/signin']">signin</a> Page</p>
+</div>
+    <p *ngIf="isSignupSuccessfull">Sign Up Successful, go to <a [routerLink]="['/signin']">Sign In</a> Page</p>
     <form *ngIf="!isSignupSuccessfull" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="control" appearance="fill">
             <mat-label>User Name</mat-label>

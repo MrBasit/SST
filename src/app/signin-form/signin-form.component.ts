@@ -24,6 +24,10 @@ export class SigninFormComponent implements OnInit {
     return this.loginFormControl.get('passwordFormControl') as FormControl;
   }
   ngOnInit(): void {
+    if(this.storageService.GetCurrentuesr!=null ||this.storageService.GetCurrentuesr!=undefined){
+      this.isLoading=true;
+      this.router.navigate(['/main']);
+    }
   }
   isLoading:boolean=false;
   Error:any=null;
