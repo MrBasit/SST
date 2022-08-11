@@ -5,7 +5,7 @@
     text-align: center;
 }
 #body .buttons{
-    height: 40%;
+    height: 30%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -14,3 +14,4 @@
     width: 20%;
     height: 20%;
 }
+
