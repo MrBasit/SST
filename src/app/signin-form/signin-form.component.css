@@ -21,3 +21,8 @@ button{
     display: flex;
     justify-content: space-around;
 }
+#Header{
+    display: flex;
+    justify-content:flex-start;
+    
+}
