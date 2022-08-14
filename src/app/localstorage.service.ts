@@ -25,6 +25,8 @@ export class LocalstorageService {
   Remove(key:string){
     
   }
+
+  
 }
 export interface User{
   "id": number,
@@ -33,5 +35,15 @@ export interface User{
   "firstName": string,
   "lastName": string,
   "accessToken": string,
-  "refreshToken": string
+  "refreshToken": string,
+  "isAdmin":Boolean
 }
+export interface UserData{
+  "id": number,
+  "email":string,
+  "username": string,
+  "firstName": string,
+  "lastName": string,
+  "isActive": boolean
+}
+

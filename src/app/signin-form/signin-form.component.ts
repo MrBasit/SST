@@ -26,7 +26,14 @@ export class SigninFormComponent implements OnInit {
   ngOnInit(): void {
     if(this.storageService.GetCurrentuesr!=null ||this.storageService.GetCurrentuesr!=undefined){
       this.isLoading=true;
-      this.router.navigate(['/main']);
+      if (this.storageService.GetCurrentuesr.isAdmin) {
+        
+      this.router.navigate(['/adminmain']);
+      }
+      else{
+        this.router.navigate(['/main']);
+      }
+      
     }
   }
   isLoading:boolean=false;
@@ -47,7 +54,12 @@ export class SigninFormComponent implements OnInit {
           console.log('r => ',r);
           this.storageService.SetCurrentUser=r.responseBody;
           console.log(this.storageService.GetCurrentuesr);
-          this.router.navigate(['/main']);
+          if (r.responseBody.isAdmin==true) {
+            this.router.navigate(['/adminmain']);
+          }else{
+            this.router.navigate(['/main']);
+          }
+          
         },
         e=>{
           this.isLoading=false;

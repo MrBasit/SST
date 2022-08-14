@@ -25,6 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForgotpasswordFormComponent } from './forgotpassword-form/forgotpassword-form.component';
 import {MatStepper, MatStepperModule, MatVerticalStepper} from '@angular/material/stepper';
 import { InitialHeaderComponent } from './initial-header/initial-header.component';
+import { AdminMainFormComponent } from './admin-main-form/admin-main-form.component';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { InitialHeaderComponent } from './initial-header/initial-header.componen
     DeleteAccountPopupComponent,
     ForgotpasswordFormComponent,
     InitialHeaderComponent,
+    AdminMainFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -55,6 +59,8 @@ import { InitialHeaderComponent } from './initial-header/initial-header.componen
     MatProgressSpinnerModule,
     MatStepperModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
     RouterModule.forRoot([
       {path:'',component:InitialFormComponent},
       {path:'signin',component:SigninFormComponent},
@@ -62,7 +68,8 @@ import { InitialHeaderComponent } from './initial-header/initial-header.componen
       {path:'main',component:MainFormComponent},
       {path:'changepassword',component:ChangePasswordFormComponent},
       {path:'updateaccount',component:UpdateAccountFormComponent},
-      {path:'forgotpassword',component:ForgotpasswordFormComponent}
+      {path:'forgotpassword',component:ForgotpasswordFormComponent},
+      {path:'adminmain',component:AdminMainFormComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService],

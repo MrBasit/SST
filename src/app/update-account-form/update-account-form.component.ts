@@ -20,7 +20,8 @@ export class UpdateAccountFormComponent implements OnInit {
   "firstName": '',
   "lastName": '',
   "accessToken": '',
-  "refreshToken": ''
+  "refreshToken": '',
+  "isAdmin":false
 
   };
   constructor(
