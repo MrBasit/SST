@@ -1,4 +1,17 @@
-<h1>Delete Account</h1>
-<p>do you want to delete your account?</p>
-<button mat-raised-button [mat-dialog-close]="false">Cancel</button>
-<button mat-raised-button [mat-dialog-close]="true" color="warn">Delete</button>
+
+<div style="width: 600px;height: 300px; position: relative;">
+    <div>
+        <h3>Delete Account</h3>
+        <br>
+        <p>do you want to delete your account?</p>
+        <br>
+        <p style="color: red;">This is a <strong>hard</strong> delete that
+            cannot be reversed and the operation requires confirmation.</p>
+    </div>
+    <br>
+    <br>
+    <div style="position: absolute; bottom: 0px">
+        <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button [mat-dialog-close]="true" color="warn">Delete</button>
+    </div>
+</div>
