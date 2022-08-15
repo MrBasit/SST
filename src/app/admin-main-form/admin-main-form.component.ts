@@ -4,6 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { AdminViewUserPopupComponent } from '../admin-view-user-popup/admin-view-user-popup.component';
 import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { LocalstorageService, UserData } from '../localstorage.service';
 import { UserService } from '../user.service';
@@ -19,7 +20,7 @@ export class AdminMainFormComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['First Name', 'Last Name', 'Username', 'Email','Account Activation','Edit','Delete'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'username', 'email','isActive','Edit','View','Delete'];
   resultsLength = 0;
   isLoading:boolean=false;
   isView:Boolean=false;
@@ -50,6 +51,16 @@ export class AdminMainFormComponent implements OnInit {
 
   }
   
+  viewData(data:any){
+    let ViewDialogRef=this.dialog.open(AdminViewUserPopupComponent,{
+      data:data
+    })
+    ViewDialogRef.afterOpened().subscribe(r=>{
+      r=data;
+      //console.log(r);
+    })
+    
+  }
   
 
   onDelete(data:any){

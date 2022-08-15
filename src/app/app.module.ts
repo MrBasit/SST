@@ -30,6 +30,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminUpdateFormComponent } from './admin-update-form/admin-update-form.component';
 import { AdminCreateUserFormComponent } from './admin-create-user-form/admin-create-user-form.component';
+import { AdminViewUserPopupComponent } from './admin-view-user-popup/admin-view-user-popup.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { AdminCreateUserFormComponent } from './admin-create-user-form/admin-cre
     AdminMainFormComponent,
     AdminUpdateFormComponent,
     AdminCreateUserFormComponent,
+    AdminViewUserPopupComponent,
   ],
   imports: [
     HttpClientModule,
@@ -65,6 +68,7 @@ import { AdminCreateUserFormComponent } from './admin-create-user-form/admin-cre
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     RouterModule.forRoot([
       {path:'',component:InitialFormComponent},
       {path:'signin',component:SigninFormComponent},

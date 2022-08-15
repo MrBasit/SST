@@ -29,7 +29,7 @@
         </div>
     </div>
     
-    <div style="width: 95%;">
+    <div style="width: 95%; font-size: 14px;">
       
         <mat-form-field appearance="standard">
             <mat-label>Search</mat-label>
@@ -41,54 +41,64 @@
             <table mat-table [dataSource]="data" matSort>
           
               <!-- First Name Column -->
-              <ng-container matColumnDef="First Name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> First Name </th>
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef style="width: 20%;"> First Name </th>
                 <td mat-cell *matCellDef="let row" style="width: 20%;"> {{row.firstName}} </td>
               </ng-container>
 
               
           
               <!-- Last Name Column -->
-              <ng-container matColumnDef="Last Name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Last Name </th>
+              <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef style="width: 20%;"> Last Name </th>
                 <td mat-cell *matCellDef="let row" style="width: 20%;"> {{row.lastName}} </td>
               </ng-container>
           
               <!-- Username Column -->
-              <ng-container matColumnDef="Username">
+              <ng-container matColumnDef="username">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Username </th>
                 <td mat-cell *matCellDef="let row" style="width: 20%;"> {{row.username}} </td>
               </ng-container>
           
               <!-- Email Column -->
-              <ng-container matColumnDef="Email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Email </th>
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef style="width: 20%;"> Email </th>
                 <td mat-cell *matCellDef="let row" style="width: 20%;"> {{row.email}} </td>
               </ng-container>
 
               
               <!-- IsActive Column -->
-              <ng-container matColumnDef="Account Activation">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;"> IsActive </th>
-                <td mat-cell *matCellDef="let row" style="width: 7%;"> {{row.isActive}} </td>
+              <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> IsActive </th>
+                <td mat-cell *matCellDef="let row" style="width: 5%;"> {{row.isActive}} </td>
               </ng-container>
               
               <!-- Edit Column -->
               <ng-container matColumnDef="Edit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;" [hidden]="isView"> Edit </th>
-                <td mat-cell *matCellDef="let row" style="width: 7%;" [hidden]="isView"> 
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> Edit </th>
+                <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView"> 
                     <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="onEdit({row})">
-                        <mat-icon>edit</mat-icon>
+                        <mat-icon style="font-size: 22px;">edit</mat-icon>
                       </button>    
                 </td>
               </ng-container>
               
+              <!-- View Column -->
+              <ng-container matColumnDef="View">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> View </th>
+                <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView">
+                  <button mat-icon-button color="warn" aria-label="Example icon button with a home icon" (click)="viewData({row})">
+                    <mat-icon color="primary" style="font-size: 22px;">remove_red_eye</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
               <!-- Delete Column -->
               <ng-container matColumnDef="Delete">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 7%;" [hidden]="isView"> Delete </th>
-                <td mat-cell *matCellDef="let row" style="width: 7%;" [hidden]="isView"> 
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> Delete </th>
+                <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView"> 
                     <button mat-icon-button color="warn" aria-label="Example icon button with a home icon" (click)="onDelete({row})">
-                        <mat-icon>delete</mat-icon>
+                        <mat-icon style="font-size: 22px;">delete</mat-icon>
                       </button>    
                 </td>
               </ng-container>
