@@ -77,8 +77,7 @@ export class AdminMainFormComponent implements OnInit {
         this.userService.DeleteAccount(url,{id:data.row.id}).subscribe(
           r=>{
             console.log(r),
-            window.location.reload();
-            //this.isLoading=false;
+            this.ngOnInit();
           },
           e=>{
             console.log(e);
