@@ -38,7 +38,7 @@
           
           <div class="mat-elevation-z8">
             
-            <table mat-table [dataSource]="data" matSort>
+            <table mat-table [dataSource]="data" matSort matSortActive="username" matSortDirection="asc" matSortDisableClear>
           
               <!-- First Name Column -->
               <ng-container matColumnDef="firstName">
