@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { LocalstorageService, UserData } from '../localstorage.service';
 import { UserService } from '../user.service';
 
@@ -22,9 +24,10 @@ export class AdminMainFormComponent implements OnInit {
   isLoading:boolean=false;
   isView:Boolean=false;
   pageSize:number=2;
+  isEdit:boolean=false;
   public data:MatTableDataSource<UserData>;
   
-  constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService) { 
+  constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService, public dialog:MatDialog) { 
     
   }
   
@@ -46,12 +49,44 @@ export class AdminMainFormComponent implements OnInit {
     )
 
   }
+  
+  
 
   onDelete(data:any){
     console.log(data);
+    
+    let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent,{
+      data:null
+    })
+    DeleteDialogRef.afterClosed().subscribe(r=>{
+      if(r){
+        this.isLoading=true;
+        let url='https://calm-hamlet-62154.herokuapp.com/user/deleteaccount';
+        console.log('id: ',data.row.id);
+        this.userService.DeleteAccount(url,{id:data.row.id}).subscribe(
+          r=>{
+            console.log(r),
+            window.location.reload();
+            //this.isLoading=false;
+          },
+          e=>{
+            console.log(e);
+          }
+        )
+      }
+    })
   }
+  
   onEdit(data:any){
-    console.log(data);
+   this.router.navigate(['/adminupdate'],{state:data});
+  }
+
+  Logout(){
+    this.isLoading=true;
+    let url='http://localhost:5000/user/logout';
+    this.userService.SignOut(url);
+    this.storageService.SetCurrentUser=null;
+    this.router.navigate(['/'])
   }
   
 

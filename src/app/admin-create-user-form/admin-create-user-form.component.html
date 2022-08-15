@@ -1,0 +1,76 @@
+<div *ngIf="isLoading" class="loader">
+    <mat-spinner></mat-spinner>
+</div>
+<div id="Header">
+    <h3 style="width: 50%;">StackHolder Specification Tool</h3>
+    <h2 style="text-align: center;">Admin Add User Panel</h2>
+</div>
+<div id="body" style="text-align: center;">
+    <div>
+        <mat-error [hidden]="!Error" style="font-size: 13px;align-items: center;">
+            <span>{{Error?.error?.error}}</span>
+            <br>
+        </mat-error>
+        <mat-error [hidden]="!Error2" style="font-size: 13px;align-items: center;">
+            <span>{{Error2?.error?.error}}</span>
+        </mat-error>
+        <br>
+    </div>
+    <form *ngIf="!isSignupSuccessfull" class="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" [formControl]="nameFormControl" placeholder="Username"
+                (ngModelChange)="checkUsername()">
+            <mat-error *ngIf="nameFormControl?.hasError('required')">
+                User Name is <strong>required</strong>
+            </mat-error>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" [formControl]="firstnameFormControl" placeholder="John">
+            <mat-error *ngIf="firstnameFormControl?.hasError('required')">
+                First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" [formControl]="lastnameFormControl" placeholder="Doe">
+            <mat-error *ngIf="lastnameFormControl?.hasError('required')">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [formControl]="emailFormControl" placeholder="any@mail.com"
+                (ngModelChange)="checkemail()">
+            <mat-error *ngIf="emailFormControl?.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="emailFormControl?.hasError('email')">
+                input is not in correct format
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [formControl]="passwordFormControl" placeholder="Your Passord">
+            <mat-error *ngIf="passwordFormControl?.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Minimum eight characters, At least one uppercase letter, At least one lowercase letter, At least one
+                number, At least one special character
+            </mat-error>
+        </mat-form-field>
+            
+                <div style="display: flex;flex-direction: row; justify-content: space-between;">
+                    <button class="submit-button" mat-raised-button type="submit" color="primary">Create User</button>
+                    <button routerLink="/adminmain" mat-button>Cancel</button>
+                </div>
+          
+    </form>
+</div>

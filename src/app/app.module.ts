@@ -28,6 +28,8 @@ import { InitialHeaderComponent } from './initial-header/initial-header.componen
 import { AdminMainFormComponent } from './admin-main-form/admin-main-form.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AdminUpdateFormComponent } from './admin-update-form/admin-update-form.component';
+import { AdminCreateUserFormComponent } from './admin-create-user-form/admin-create-user-form.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ForgotpasswordFormComponent,
     InitialHeaderComponent,
     AdminMainFormComponent,
+    AdminUpdateFormComponent,
+    AdminCreateUserFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -69,7 +73,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
       {path:'changepassword',component:ChangePasswordFormComponent},
       {path:'updateaccount',component:UpdateAccountFormComponent},
       {path:'forgotpassword',component:ForgotpasswordFormComponent},
-      {path:'adminmain',component:AdminMainFormComponent}
+      {path:'adminmain',component:AdminMainFormComponent},
+      {path:'adminupdate',component:AdminUpdateFormComponent,data:{data:{}}},
+      {path:'createuser',component:AdminCreateUserFormComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService],

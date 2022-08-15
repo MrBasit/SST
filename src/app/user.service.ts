@@ -10,6 +10,16 @@ export class UserService {
   Signup(url:string,body:any){
     return this.http.post(url,body);
   }
+  CreateUser(url:string,body:any){
+    this.Autorization=this.storageService.GetCurrentuesr.accessToken;
+    let header = new HttpHeaders(
+      {'Authorization':'Bearer '+this.Autorization}
+    );
+    let options = {
+      headers:header
+    }
+    return this.http.post(url,body,options);
+  }
   Signin(url:string,body:any){
     return this.http.post(url,body);
   }
