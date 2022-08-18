@@ -45,12 +45,38 @@
             <mat-error *ngIf="emailFormControl?.hasError('required')">
                 Email is <strong>required</strong>
             </mat-error>
+            <mat-error *ngIf="emailFormControl?.hasError('pattern')">
+                Invalid Email
+            </mat-error>
         </mat-form-field>
         <br>
-
-        <div class="control-bar">
-            <button routerLink="/adminmain" mat-raised-button>Cancel</button>
-            <button class="submit-button" mat-raised-button type="submit" color="primary">Update</button>
-        </div>
+        
+        <p style="font-size: 14px;" class="control">You can leave Password field empty if you don't wish to change password</p>
+        <br>
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="{{passwordType}}" [formControl]="passwordFormControl" placeholder="New Password(Optional)">
+            <mat-icon matSuffix mat-icon-button style="font-size: 22px;" (click)="changeVisible()">visibility</mat-icon>
+            
+            <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Minimum eight characters, At least one uppercase letter, At least one lowercase letter, At least one number, At least one special character
+            </mat-error>
+        </mat-form-field>
+        
+        
     </form>
+    <div class="control">
+        
+    <section class="example-section">
+        <mat-label style="font-size: 16px;"><strong>Status : </strong></mat-label>
+        <mat-checkbox class="example-margin" [(ngModel)]="isActive">is Active!</mat-checkbox>
+    </section>
+    </div>
+    <br>
+    <form class="form" (ngSubmit)="onSubmit()">
+    <div class="control-bar">
+        <button routerLink="/edituser" mat-raised-button>Cancel</button>
+        <button class="submit-button" mat-raised-button type="submit" color="primary">Update</button>
+    </div>
+</form>
 </div>

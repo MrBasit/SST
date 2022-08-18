@@ -19,6 +19,17 @@
 button {
     width: 100px;
 }
+.example-section {
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+    height: 60px;
+  }
+
+.example-margin {
+    margin: 0 12px;
+  }
 
 .control-bar {
     width: 250px;

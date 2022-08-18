@@ -44,6 +44,7 @@ export interface UserData{
   "username": string,
   "firstName": string,
   "lastName": string,
-  "isActive": boolean
+  "isActive": string,
+  "isAdmin":string
 }
 

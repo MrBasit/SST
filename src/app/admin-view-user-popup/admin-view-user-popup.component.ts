@@ -11,11 +11,15 @@ import { UserService } from '../user.service';
 })
 export class AdminViewUserPopupComponent implements OnInit {
 
+  isActive:boolean=false;
 
   userinfo:any;
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService, 
     @Inject(MAT_DIALOG_DATA) public data:UserData) { 
       this.userinfo=this.data;
+      if (this.userinfo.row.isActive=="Activated") {
+        this.isActive=true;
+      }
       console.log(this.userinfo);
   }
   ngOnInit(): void {

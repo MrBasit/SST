@@ -32,6 +32,8 @@ import { AdminUpdateFormComponent } from './admin-update-form/admin-update-form.
 import { AdminCreateUserFormComponent } from './admin-create-user-form/admin-create-user-form.component';
 import { AdminViewUserPopupComponent } from './admin-view-user-popup/admin-view-user-popup.component';
 import { MatSortModule } from '@angular/material/sort';
+import { AdminCrudUserFormComponent } from './admin-crud-user-form/admin-crud-user-form.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MatSortModule } from '@angular/material/sort';
     AdminUpdateFormComponent,
     AdminCreateUserFormComponent,
     AdminViewUserPopupComponent,
+    AdminCrudUserFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -69,6 +72,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCheckboxModule,
     RouterModule.forRoot([
       {path:'',component:InitialFormComponent},
       {path:'signin',component:SigninFormComponent},
@@ -79,7 +83,8 @@ import { MatSortModule } from '@angular/material/sort';
       {path:'forgotpassword',component:ForgotpasswordFormComponent},
       {path:'adminmain',component:AdminMainFormComponent},
       {path:'adminupdate',component:AdminUpdateFormComponent,data:{data:{}}},
-      {path:'createuser',component:AdminCreateUserFormComponent}
+      {path:'createuser',component:AdminCreateUserFormComponent},
+      {path:'edituser',component:AdminCrudUserFormComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService],

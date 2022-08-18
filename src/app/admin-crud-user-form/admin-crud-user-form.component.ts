@@ -8,48 +8,62 @@ import { AdminViewUserPopupComponent } from '../admin-view-user-popup/admin-view
 import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { LocalstorageService, UserData } from '../localstorage.service';
 import { UserService } from '../user.service';
-
+import {MatIconModule} from '@angular/material/icon';
 @Component({
-  selector: 'app-admin-main-form',
-  templateUrl: './admin-main-form.component.html',
-  styleUrls: ['./admin-main-form.component.css']
+  selector: 'app-admin-crud-user-form',
+  templateUrl: './admin-crud-user-form.component.html',
+  styleUrls: ['./admin-crud-user-form.component.css']
 })
-
-export class AdminMainFormComponent implements OnInit {
+export class AdminCrudUserFormComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['username','firstName', 'lastName', 'email','isActive','Edit','View','Delete'];
+  displayedColumns: string[] = ['username','firstName', 'lastName', 'email','accounttype','isActive','Edit','View','Delete'];
   resultsLength = 0;
   isLoading:boolean=false;
   isView:Boolean=false;
   pageSize:number=2;
   isEdit:boolean=false;
   public data:MatTableDataSource<UserData>;
-  CurrentUser:any={};
-
+  
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService, public dialog:MatDialog) { 
     
   }
   
   ngOnInit(): void {
-    this.CurrentUser = this.storageService.GetCurrentuesr;
     this.isLoading=true;
-    let url="https://calm-hamlet-62154.herokuapp.com/admin/get";
+    let url="https://calm-hamlet-62154.herokuapp.com/user/get";
     this.userService.Awake(url).subscribe(
       (r:any)=>{
        
         this.data=r;
         this.resultsLength=r.length;
-        console.log(r);
+        //console.log(r);
         this.isLoading=false;
         this.data=new MatTableDataSource(r);
         this.data.paginator = this.paginator;
         this.data.sort = this.sort;
-        
+        for (let index = 0; index < this.data.data.length; index++) {
+          const element = this.data.data[index];
+          
+          if (element.isActive.toString()=="true") {
+            this.data.data[index].isActive="Activated"  
+          }else{
+            this.data.data[index].isActive="Not Activated"
+          }
+
+          if (element.isAdmin.toString()=="true") {
+            this.data.data[index].isAdmin="Admin"
+          }else{
+            this.data.data[index].isAdmin="User"
+          }
+
+        }
       }
     )
+
+    
 
   }
   
@@ -121,5 +135,4 @@ export class AdminMainFormComponent implements OnInit {
       this.data.paginator.firstPage();
     }
   }
-
 }

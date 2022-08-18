@@ -17,12 +17,17 @@ export class SignupFormComponent implements OnInit {
   isSignupSuccessfull=false;
   Error:any=null;
   Error2:any=null;
-  constructor(public http:HttpClient,public router:Router,public userService:UserService) { }
+  regex:any=null;
+  passwordType:string="password";
+  
+  constructor(public http:HttpClient,public router:Router,public userService:UserService) { 
+
+  }
   signupForm=new FormGroup({
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required,Validators.email]),
+    emailFormControl:new FormControl('',[Validators.required,Validators.pattern(this.regex=new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'))]),
     passwordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
   public get firstnameFormControl(){
@@ -43,6 +48,18 @@ export class SignupFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+  changeVisible(){
+
+    if (this.passwordType=="password") {
+        this.passwordType="text";
+    }else{
+      this.passwordType="password";
+    }
+  }
+
+
 
   checkemail(){
     console.log(this.signupForm.value);

@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalstorageService, User } from '../localstorage.service';
 import { UserService } from '../user.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-admin-update-form',
@@ -14,6 +15,9 @@ export class AdminUpdateFormComponent implements OnInit {
 
   isLoading:boolean=false;
   Error:any=null;
+  regex:any=null;
+  isActive:boolean=false;
+  passwordType:string="password";
   
   data:any;
   constructor(
@@ -23,11 +27,14 @@ export class AdminUpdateFormComponent implements OnInit {
     public storageService:LocalstorageService
   ){}
   
+  
   updateAccountForm=new FormGroup({
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required])
+    emailFormControl:new FormControl('',[Validators.pattern(this.regex=new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'))]),
+    passwordFormControl:new FormControl('',[Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
+
   });
   public get firstnameFormControl(){
     return this.updateAccountForm.controls['firstnameFormControl'] as FormControl;
@@ -41,6 +48,10 @@ export class AdminUpdateFormComponent implements OnInit {
   public get emailFormControl(){
     return this.updateAccountForm.controls['emailFormControl'] as FormControl;
   }
+
+  public get passwordFormControl(){
+    return this.updateAccountForm.get('passwordFormControl') as FormControl;
+  }
   ngOnInit(): void {
     
     console.log(history.state);
@@ -50,8 +61,23 @@ export class AdminUpdateFormComponent implements OnInit {
       this.firstnameFormControl.setValue(this.data.row.firstName);
       this.lastnameFormControl.setValue(this.data.row.lastName)
       this.emailFormControl.setValue(this.data.row.email)
-    
+    if (this.data.row.isActive=="Activated") {
+      this.isActive=true;
+    }else{
+      this.isActive=false;
+    }
   }
+
+  changeVisible(){
+
+    if (this.passwordType=="password") {
+        this.passwordType="text";
+    }else{
+      this.passwordType="password";
+    }
+  }
+
+
   onSubmit(){
     this.isLoading=true;
     if(this.updateAccountForm.valid){
@@ -61,7 +87,9 @@ export class AdminUpdateFormComponent implements OnInit {
           username:this.updateAccountForm.value['nameFormControl'],
           firstName:this.updateAccountForm.value['firstnameFormControl'],
           lastName:this.updateAccountForm.value['lastnameFormControl'],
-          email:this.updateAccountForm.value['emailFormControl']
+          email:this.updateAccountForm.value['emailFormControl'],
+          isActive:this.isActive,
+          password:this.updateAccountForm.value['passwordFormControl'],
       }
       console.log('body -> ',body);
       this.userService.UpdateAccount(url,body).subscribe(
@@ -70,7 +98,7 @@ export class AdminUpdateFormComponent implements OnInit {
           if(r.responseCode==1){
             console.log(r);
             
-            this.router.navigate(['/adminmain']);
+            this.router.navigate(['/edituser']);
           }
           else{
             this.Error={

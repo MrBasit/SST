@@ -38,6 +38,18 @@ export class SigninFormComponent implements OnInit {
   }
   isLoading:boolean=false;
   Error:any=null;
+  passwordType:string="password";
+
+  changeVisible(){
+
+    if (this.passwordType=="password") {
+        this.passwordType="text";
+    }else{
+      this.passwordType="password";
+    }
+  }
+
+
   onSubmit(){
     if(this.loginFormControl.valid){
       this.isLoading=true;
