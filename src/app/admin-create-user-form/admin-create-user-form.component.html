@@ -53,6 +53,9 @@
             <mat-error *ngIf="emailFormControl?.hasError('email')">
                 input is not in correct format
             </mat-error>
+            <mat-error *ngIf="emailFormControl?.hasError('pattern')">
+                Invalid Email
+            </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field class="control" appearance="fill">
