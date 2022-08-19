@@ -145,7 +145,7 @@ export class AdminCreateUserFormComponent implements OnInit {
               this.Error=null;
               console.log(r);
               this.isSignupSuccessfull=true;
-              this.router.navigate(['/adminmain'])
+              this.router.navigate(['/edituser'])
             }        
           },
           e=>{
