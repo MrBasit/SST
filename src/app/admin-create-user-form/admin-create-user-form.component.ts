@@ -17,12 +17,13 @@ export class AdminCreateUserFormComponent implements OnInit {
   isSignupSuccessfull=false;
   Error:any=null;
   Error2:any=null;
+  regex:any=null;
   constructor(public http:HttpClient,public router:Router,public userService:UserService) { }
   signupForm=new FormGroup({
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required,Validators.email]),
+    emailFormControl:new FormControl('',[Validators.required,Validators.required,Validators.pattern(this.regex=new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'))]),
     passwordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
   public get firstnameFormControl(){
