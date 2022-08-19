@@ -57,7 +57,8 @@
         <br>
         <mat-form-field class="control" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput type="password" [formControl]="passwordFormControl" placeholder="Your Passord">
+            <input matInput type="{{passwordType}}" [formControl]="passwordFormControl" placeholder="Your Passord">
+                <mat-icon matSuffix mat-icon-button style="font-size: 22px;" (click)="changeVisible()">visibility</mat-icon>
             <mat-error *ngIf="passwordFormControl?.hasError('required')">
                 Password is <strong>required</strong>
             </mat-error>

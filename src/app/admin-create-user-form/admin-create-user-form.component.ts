@@ -18,6 +18,10 @@ export class AdminCreateUserFormComponent implements OnInit {
   Error:any=null;
   Error2:any=null;
   regex:any=null;
+  passwordType:string="password"
+
+
+
   constructor(public http:HttpClient,public router:Router,public userService:UserService) { }
   signupForm=new FormGroup({
     firstnameFormControl:new FormControl('',[Validators.required]),
@@ -44,6 +48,17 @@ export class AdminCreateUserFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+  changeVisible(){
+
+    if (this.passwordType=="password") {
+        this.passwordType="text";
+    }else{
+      this.passwordType="password";
+    }
+  }
+
 
   checkemail(){
     console.log(this.signupForm.value);
