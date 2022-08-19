@@ -50,9 +50,6 @@
             <mat-error *ngIf="emailFormControl?.hasError('required')">
                 Email is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="emailFormControl?.hasError('email')">
-                input is not in correct format
-            </mat-error>
             <mat-error *ngIf="emailFormControl?.hasError('pattern')">
                 Invalid Email
             </mat-error>

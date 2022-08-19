@@ -23,7 +23,7 @@ export class AdminCreateUserFormComponent implements OnInit {
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required,Validators.required,Validators.pattern(this.regex=new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'))]),
+    emailFormControl:new FormControl('',[Validators.required,Validators.pattern(this.regex=new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'))]),
     passwordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
   public get firstnameFormControl(){
