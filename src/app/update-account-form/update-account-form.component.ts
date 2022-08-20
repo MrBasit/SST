@@ -101,10 +101,10 @@ export class UpdateAccountFormComponent implements OnInit {
       )
     }
     else{
-
+      console.log('form -> ',this.updateAccountForm.value);
+    
+      this.isLoading=false;
     }
-    console.log('form -> ',this.updateAccountForm.value);
-    this.isLoading=false;
-  }
+    }
 }
 
