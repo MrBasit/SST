@@ -13,6 +13,7 @@ import { UserService } from '../user.service';
 export class UpdateAccountFormComponent implements OnInit {
   isLoading:boolean=false;
   Error:any=null;
+  regex:any=null;
   CurrentUser:User={
   "id": 0,
   "username": '',
@@ -34,7 +35,7 @@ export class UpdateAccountFormComponent implements OnInit {
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
     nameFormControl:new FormControl('',[Validators.required]),
-    emailFormControl:new FormControl('',[Validators.required])
+    emailFormControl:new FormControl('',[Validators.required,Validators.pattern(this.regex=new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'))])
   });
   public get firstnameFormControl(){
     return this.updateAccountForm.controls['firstnameFormControl'] as FormControl;
@@ -103,7 +104,7 @@ export class UpdateAccountFormComponent implements OnInit {
 
     }
     console.log('form -> ',this.updateAccountForm.value);
-  
+    this.isLoading=false;
   }
 }
 

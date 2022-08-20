@@ -82,6 +82,7 @@ export class SigninFormComponent implements OnInit {
     }
     else{
       console.log('form is invalid');
+      this.isLoading=false;
     }
 
   }

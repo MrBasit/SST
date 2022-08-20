@@ -48,9 +48,9 @@ export class AdminCrudUserFormComponent implements OnInit {
           const element = this.data.data[index];
           
           if (element.isActive.toString()=="true") {
-            this.data.data[index].isActive="Activated"  
+            this.data.data[index].isActive="Active"  
           }else{
-            this.data.data[index].isActive="Not Activated"
+            this.data.data[index].isActive="Not Active"
           }
 
           if (element.isAdmin.toString()=="true") {
