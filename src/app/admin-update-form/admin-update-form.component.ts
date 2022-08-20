@@ -61,7 +61,7 @@ export class AdminUpdateFormComponent implements OnInit {
       this.firstnameFormControl.setValue(this.data.row.firstName);
       this.lastnameFormControl.setValue(this.data.row.lastName)
       this.emailFormControl.setValue(this.data.row.email)
-    if (this.data.row.isActive=="Activated") {
+    if (this.data.row.isActive=="Active") {
       this.isActive=true;
     }else{
       this.isActive=false;
