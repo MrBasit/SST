@@ -17,7 +17,7 @@
           <!-- <mat-label>Email/User Name</mat-label> -->
           <input matInput type="text" [formControl]="usernameFormControl" placeholder="Email/UserName" name="usernameFormControl">
           <mat-error *ngIf="usernameFormControl?.hasError('required')">
-            Email is <strong>required</strong>
+            Email/Username is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <br>

@@ -17,7 +17,7 @@ export class AdminViewUserPopupComponent implements OnInit {
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService, 
     @Inject(MAT_DIALOG_DATA) public data:UserData) { 
       this.userinfo=this.data;
-      if (this.userinfo.row.isActive=="Activated") {
+      if (this.userinfo.row.isActive=="Active") {
         this.isActive=true;
       }
       console.log(this.userinfo);

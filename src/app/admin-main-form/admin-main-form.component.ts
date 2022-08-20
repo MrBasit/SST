@@ -21,6 +21,11 @@ export class AdminMainFormComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['username','firstName', 'lastName', 'email','isActive','Edit','View','Delete'];
+  menuItems:any[]=[
+                    {link:'/edituser',name:'Users'},
+                    {link:'/editobjective',name:'Objectives'},
+                    {link:'/editset',name:'Sets'}
+                  ]
   resultsLength = 0;
   isLoading:boolean=false;
   isView:Boolean=false;
@@ -47,11 +52,23 @@ export class AdminMainFormComponent implements OnInit {
         this.data=new MatTableDataSource(r);
         this.data.paginator = this.paginator;
         this.data.sort = this.sort;
-        
+        this.menuItems.sort(this.compare);
       }
     )
+    
 
   }
+  
+  compare( a:any, b:any ) {
+    if ( a.name < b.name ){
+      return -1;
+    }
+    if ( a.name > b.name ){
+      return 1;
+    }
+    return 0;
+  }
+  
   
   viewData(data:any){
     let ViewDialogRef=this.dialog.open(AdminViewUserPopupComponent,{

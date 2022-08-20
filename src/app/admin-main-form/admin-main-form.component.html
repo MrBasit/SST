@@ -18,9 +18,9 @@
           <button (click)="Logout()" mat-menu-item>Sign Out</button>
       </mat-menu>
       <mat-menu #AccountMenu="matMenu">
-          <button routerLink="/edituser"mat-menu-item>Users</button>
-          <button routerLink="/editobjective" mat-menu-item>Objectives</button>
-          <button routerLink="/editset" mat-menu-item>Sets</button>
+        <div *ngFor="let data of menuItems">
+          <button routerLink="{{data.link}}"mat-menu-item>{{data.name}}</button>
+        </div>  
       </mat-menu>
     </div>  
        
