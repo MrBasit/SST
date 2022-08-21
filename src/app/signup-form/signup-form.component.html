@@ -3,7 +3,7 @@
 </div>
 <div id="Header">
         <h3 style="width: 50%;">StackHolder Specification Tool</h3>
-        <h2 style="text-align: center;">Sign In</h2>   
+        <h2 style="text-align: center;">Sign Up</h2>   
 </div>
 <div id="body">
     <div>
@@ -16,7 +16,7 @@
     </mat-error>
     <br>
 </div>
-    <p *ngIf="isSignupSuccessfull">Sign Up Successful, go to <a [routerLink]="['/signin']">Sign In</a> Page</p>
+    <p *ngIf="isSignupSuccessfull">Please activate your account via the email we sent</p>
     <form *ngIf="!isSignupSuccessfull" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="control" appearance="fill">
             <mat-label>User Name</mat-label>
@@ -70,6 +70,8 @@
         <p style="text-align: center;">Already Have an Account ? <a [routerLink]="['/signin']">Sign In</a>
         <br>
         <br>
+        <button [routerLink]="['/']" mat-button>Cancel</button>
         <button class="submit-button" mat-raised-button type="submit" color="primary">Sign Up</button>
+        
     </form>
 </div>

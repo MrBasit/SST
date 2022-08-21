@@ -18,7 +18,8 @@ export class AdminCreateUserFormComponent implements OnInit {
   Error:any=null;
   Error2:any=null;
   regex:any=null;
-  passwordType:string="password"
+  passwordType:string="password";
+  username:string="";
 
 
 
@@ -110,7 +111,7 @@ export class AdminCreateUserFormComponent implements OnInit {
             if (this.isUsername) {
               this.Error={
                 error:{
-                  error:"User is already registered with this Username! Try a Different One"
+                  error:"User is already registered with this Username. Try a Different One"
                 }
               }
             }else{
@@ -139,13 +140,16 @@ export class AdminCreateUserFormComponent implements OnInit {
         this.isLoading=true;
         console.log(this.signupForm.value);
         let url="https://calm-hamlet-62154.herokuapp.com/admin/signup";
+        this.username=this.signupForm.value['nameFormControl'];
+        this.username=this.username.trim();
         let body={
-            username:this.signupForm.value['nameFormControl'],
+            username:this.username,
             firstName:this.signupForm.value['firstnameFormControl'],
             lastName:this.signupForm.value['lastnameFormControl'],
             email:this.signupForm.value['emailFormControl'],
             password:this.signupForm.value['passwordFormControl'],
         }
+        
         console.log('body -> ',body);
         this.userService.CreateUser(url,body).subscribe(
           (r:any)=>{

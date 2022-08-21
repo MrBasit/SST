@@ -18,6 +18,7 @@ export class AdminUpdateFormComponent implements OnInit {
   regex:any=null;
   isActive:boolean=false;
   passwordType:string="password";
+  username:string="";
   
   data:any;
   constructor(
@@ -79,12 +80,14 @@ export class AdminUpdateFormComponent implements OnInit {
 
 
   onSubmit(){
+    this.username=this.updateAccountForm.value['nameFormControl'];
+    this.username=this.username.trim();
     this.isLoading=true;
     if(this.updateAccountForm.valid){
       let url="https://calm-hamlet-62154.herokuapp.com/admin/update";
       let body={
           id:this.data.row.id,
-          username:this.updateAccountForm.value['nameFormControl'],
+          username:this.username,
           firstName:this.updateAccountForm.value['firstnameFormControl'],
           lastName:this.updateAccountForm.value['lastnameFormControl'],
           email:this.updateAccountForm.value['emailFormControl'],

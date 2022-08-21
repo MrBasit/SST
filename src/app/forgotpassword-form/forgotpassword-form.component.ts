@@ -14,6 +14,7 @@ export class ForgotpasswordFormComponent implements OnInit {
   CurrentUser:any={}
   isLoading:boolean=false;
   Error:any=null;
+  regex:any=null;
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService) { 
     this.CurrentUser=this.storageService.GetCurrentuesr;
   }
@@ -22,10 +23,10 @@ export class ForgotpasswordFormComponent implements OnInit {
   }
   
   forgotPasswordForm=new FormGroup({
-    emailformControl:new FormControl('',[Validators.required]),
+    emailformControl:new FormControl('',[Validators.required,Validators.pattern(this.regex=new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'))]),
     currentPasswordFormControl:new FormControl('',[Validators.required]),
-    newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
-    confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
+    newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
+    confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   
   })
   public get emailformControl(){

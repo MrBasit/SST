@@ -21,6 +21,10 @@ export class ChangePasswordFormComponent implements OnInit {
   CurrentUser:any={}
   isLoading:boolean=false;
   Error:any=null;
+  passwordCurrent:string='password';
+  passwordNew:string='password';
+  passwordConfirm:string='password';
+  
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService) { 
     this.CurrentUser=this.storageService.GetCurrentuesr;
   }
@@ -30,8 +34,8 @@ export class ChangePasswordFormComponent implements OnInit {
 
   changePasswordForm=new FormGroup({
     currentPasswordFormControl:new FormControl('',[Validators.required]),
-    newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
-    confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]),
+    newPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
+    confirmPasswordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
 
   public get currentPasswordFormControl(){
@@ -42,6 +46,32 @@ export class ChangePasswordFormComponent implements OnInit {
   }
   public get confirmPasswordFormControl(){
     return this.changePasswordForm.get('confirmPasswordFormControl') as FormControl;
+  }
+
+  changeCurrentVisible(){
+
+    if (this.passwordCurrent=="password") {
+        this.passwordCurrent="text";
+    }else{
+      this.passwordCurrent="password";
+    }
+  }
+  changeNewVisible(){
+
+    if (this.passwordNew=="password") {
+        this.passwordNew="text";
+    }else{
+      this.passwordNew="password";
+    }
+  }
+
+  changeConfirmVisible(){
+
+    if (this.passwordConfirm=="password") {
+        this.passwordConfirm="text";
+    }else{
+      this.passwordConfirm="password";
+    }
   }
 
   onSubmit(){

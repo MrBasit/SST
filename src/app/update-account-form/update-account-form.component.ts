@@ -14,6 +14,7 @@ export class UpdateAccountFormComponent implements OnInit {
   isLoading:boolean=false;
   Error:any=null;
   regex:any=null;
+  username:string="";
   CurrentUser:User={
   "id": 0,
   "username": '',
@@ -59,11 +60,13 @@ export class UpdateAccountFormComponent implements OnInit {
   }
   onSubmit(){
     this.isLoading=true;
+    this.username=this.updateAccountForm.value['nameFormControl'];
+    this.username=this.username.trim();
     if(this.updateAccountForm.valid){
       let url="https://calm-hamlet-62154.herokuapp.com/user/update";
       let body={
           id:this.CurrentUser.id,
-          username:this.updateAccountForm.value['nameFormControl'],
+          username:this.username,
           firstName:this.updateAccountForm.value['firstnameFormControl'],
           lastName:this.updateAccountForm.value['lastnameFormControl'],
           email:this.updateAccountForm.value['emailFormControl']
