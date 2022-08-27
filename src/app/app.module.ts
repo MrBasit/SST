@@ -34,6 +34,7 @@ import { AdminViewUserPopupComponent } from './admin-view-user-popup/admin-view-
 import { MatSortModule } from '@angular/material/sort';
 import { AdminCrudUserFormComponent } from './admin-crud-user-form/admin-crud-user-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       {path:'edituser',component:AdminCrudUserFormComponent}
     ])
   ],
-  providers: [UserService,HttpClient,LocalstorageService],
+  providers: [UserService,HttpClient,LocalstorageService,{provide:LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
