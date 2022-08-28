@@ -16,7 +16,7 @@
     <div flex layout="column" style="overflow: auto; height: 100%;">
         <form class="form" (ngSubmit)="onSubmit()">
             <mat-form-field class="control" appearance="fill">
-                <mat-label>Name</mat-label>
+                <mat-label>User Name</mat-label>
                 <input matInput type="text" [formControl]="nameFormControl" placeholder="Username">
                 <mat-error *ngIf="nameFormControl?.hasError('required')">
                     Name is <strong>required</strong>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { LocalstorageService, User } from '../localstorage.service';
 import { UserService } from '../user.service';
 
@@ -74,13 +75,24 @@ export class ChangePasswordFormComponent implements OnInit {
     }
   }
 
+  checkCurrentNew(){
+    console.log(this.currentPasswordFormControl.value);
+    if(this.currentPasswordFormControl.value == this.newPasswordFormControl.value){
+      this.Error={
+        error:{
+          error:"New Password should be different from Current Password"
+        }
+      }
+    }
+  }
+
   onSubmit(){
     this.isLoading=true;
     if(this.newPasswordFormControl.value != this.confirmPasswordFormControl.value){
       this.confirmPasswordFormControl.setErrors({'PasswordMismatch':true})
     }
     if(this.changePasswordForm.valid){
-      let url="https://calm-hamlet-62154.herokuapp.com/user/updatepassword";
+      let url=GlobalComponent.apiUrl+"user/updatepassword";
       let body={
           "id":this.CurrentUser.id,
           "currentPassword":this.changePasswordForm.value['currentPasswordFormControl'],

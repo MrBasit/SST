@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class InitialFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading=true;
-      let url="https://calm-hamlet-62154.herokuapp.com/user/get";
+      let url=GlobalComponent.apiUrl+"user/get";
       this.userService.Awake(url).subscribe(
         (r:any)=>{
           this.isLoading=false;

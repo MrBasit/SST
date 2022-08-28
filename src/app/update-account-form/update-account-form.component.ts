@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { LocalstorageService, User } from '../localstorage.service';
 import { UserService } from '../user.service';
 
@@ -63,7 +64,7 @@ export class UpdateAccountFormComponent implements OnInit {
     this.username=this.updateAccountForm.value['nameFormControl'];
     this.username=this.username.trim();
     if(this.updateAccountForm.valid){
-      let url="https://calm-hamlet-62154.herokuapp.com/user/update";
+      let url=GlobalComponent.apiUrl+"user/update";
       let body={
           id:this.CurrentUser.id,
           username:this.username,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { LocalstorageService, User } from '../localstorage.service';
 import { UserService } from '../user.service';
 
@@ -15,6 +16,7 @@ export class ForgotpasswordFormComponent implements OnInit {
   isLoading:boolean=false;
   Error:any=null;
   regex:any=null;
+  disable:boolean=false;
   constructor(public userService:UserService,public router:Router,private storageService:LocalstorageService) { 
     this.CurrentUser=this.storageService.GetCurrentuesr;
   }
@@ -44,7 +46,7 @@ export class ForgotpasswordFormComponent implements OnInit {
 
   forgot(){
     this.isLoading=true;
-    let url="https://calm-hamlet-62154.herokuapp.com/user/forgotpassword";
+    let url=GlobalComponent.apiUrl+"user/forgotpassword";
       let body={
           "email":this.forgotPasswordForm.value['emailformControl']
       }
@@ -57,6 +59,7 @@ export class ForgotpasswordFormComponent implements OnInit {
             
           }
           else{
+            this.disable=true;
             this.Error={
               error:{
                 error:r.responseMessage
@@ -78,7 +81,7 @@ export class ForgotpasswordFormComponent implements OnInit {
       this.confirmPasswordFormControl.setErrors({'PasswordMismatch':true})
     }
     if(this.forgotPasswordForm.valid){
-      let url="https://calm-hamlet-62154.herokuapp.com/user/updateforgotpassword";
+      let url=GlobalComponent.apiUrl+"user/updateforgotpassword";
       let body={
           "email":this.forgotPasswordForm.value['emailformControl'],
           "currentPassword":this.forgotPasswordForm.value['currentPasswordFormControl'],

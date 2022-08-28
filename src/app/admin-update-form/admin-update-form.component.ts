@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocalstorageService, User } from '../localstorage.service';
+import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { GlobalComponent } from 'src/global-component';
 
 @Component({
   selector: 'app-admin-update-form',
@@ -84,7 +84,7 @@ export class AdminUpdateFormComponent implements OnInit {
     this.username=this.username.trim();
     this.isLoading=true;
     if(this.updateAccountForm.valid){
-      let url="https://calm-hamlet-62154.herokuapp.com/admin/update";
+      let url=GlobalComponent.apiUrl+"admin/update";
       let body={
           id:this.data.row.id,
           username:this.username,

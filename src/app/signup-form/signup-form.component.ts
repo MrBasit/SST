@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class SignupFormComponent implements OnInit {
   signupForm=new FormGroup({
     firstnameFormControl:new FormControl('',[Validators.required]),
     lastnameFormControl:new FormControl('',[Validators.required]),
-    nameFormControl:new FormControl('',[Validators.required]),
+    nameFormControl:new FormControl('',[Validators.required,Validators.pattern('^.{4,}$')]),
     emailFormControl:new FormControl('',[Validators.required,Validators.pattern(this.regex=new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'))]),
     passwordFormControl:new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}$')]),
   })
@@ -64,7 +65,7 @@ export class SignupFormComponent implements OnInit {
 
   checkemail(){
     console.log(this.signupForm.value);
-      let url="https://calm-hamlet-62154.herokuapp.com/user/checkemail";
+      let url=GlobalComponent.apiUrl+"user/checkemail";
       let body={
           email:this.signupForm.value['emailFormControl']
       }
@@ -100,7 +101,7 @@ export class SignupFormComponent implements OnInit {
 
   checkUsername(){
     console.log(this.signupForm.value);
-      let url="https://calm-hamlet-62154.herokuapp.com/user/checkusername";
+      let url=GlobalComponent.apiUrl+"user/checkusername";
       let body={
           username:this.signupForm.value['nameFormControl']
       }
@@ -141,7 +142,7 @@ export class SignupFormComponent implements OnInit {
       if(this.signupForm.valid){
         this.isLoading=true;
         console.log(this.signupForm.value);
-        let url="https://calm-hamlet-62154.herokuapp.com/user/signup";
+        let url=GlobalComponent.apiUrl+"user/signup";
         let body={
             username:this.username,
             firstName:this.signupForm.value['firstnameFormControl'],

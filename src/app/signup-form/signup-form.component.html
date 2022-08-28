@@ -24,7 +24,9 @@
             <mat-error *ngIf="nameFormControl?.hasError('required')">
                 User Name is <strong>required</strong>
             </mat-error>
-
+            <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                Minimum <strong>Four(4)</strong> characters are required
+            </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field class="control" appearance="fill">

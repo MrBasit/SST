@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -63,7 +64,7 @@ export class AdminCreateUserFormComponent implements OnInit {
 
   checkemail(){
     console.log(this.signupForm.value);
-      let url="https://calm-hamlet-62154.herokuapp.com/user/checkemail";
+      let url=GlobalComponent.apiUrl+"user/checkemail";
       let body={
           email:this.signupForm.value['emailFormControl']
       }
@@ -99,7 +100,7 @@ export class AdminCreateUserFormComponent implements OnInit {
 
   checkUsername(){
     console.log(this.signupForm.value);
-      let url="https://calm-hamlet-62154.herokuapp.com/user/checkusername";
+      let url=GlobalComponent.apiUrl+"user/checkusername";
       let body={
           username:this.signupForm.value['nameFormControl']
       }
@@ -139,7 +140,7 @@ export class AdminCreateUserFormComponent implements OnInit {
       if(this.signupForm.valid){
         this.isLoading=true;
         console.log(this.signupForm.value);
-        let url="https://calm-hamlet-62154.herokuapp.com/admin/signup";
+        let url=GlobalComponent.apiUrl+"admin/signup";
         this.username=this.signupForm.value['nameFormControl'];
         this.username=this.username.trim();
         let body={

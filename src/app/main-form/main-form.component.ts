@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
@@ -22,7 +23,7 @@ export class MainFormComponent implements OnInit {
 
   onSignoutClick(){
     this.isLoading=true;
-    let url='http://localhost:5000/user/logout';
+    let url=GlobalComponent.apiUrl+'user/logout';
     this.userService.SignOut(url);
     this.storageService.SetCurrentUser=null;
     this.router.navigate(['/'])
@@ -36,7 +37,7 @@ export class MainFormComponent implements OnInit {
     DeleteDialogRef.afterClosed().subscribe(r=>{
       if(r){
         this.isLoading=true;
-        let url='https://calm-hamlet-62154.herokuapp.com/user/deleteaccount';
+        let url=GlobalComponent.apiUrl+'user/deleteaccount';
         console.log('id: ',this.CurrentUser.id);
         this.userService.DeleteAccount(url,{id:this.CurrentUser.id}).subscribe(
           r=>{

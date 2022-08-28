@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
+import { GlobalComponent } from 'src/global-component';
 import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
 
@@ -54,7 +55,7 @@ export class SigninFormComponent implements OnInit {
     if(this.loginFormControl.valid){
       this.isLoading=true;
       console.log(this.loginFormControl.value);
-      let url="https://calm-hamlet-62154.herokuapp.com/user/login";
+      let url=GlobalComponent.apiUrl+"user/login";
       let body={
           email:this.loginFormControl.value['usernameFormControl'],
           password:this.loginFormControl.value['passwordFormControl']

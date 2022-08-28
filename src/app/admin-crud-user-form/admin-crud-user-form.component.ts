@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -8,7 +8,7 @@ import { AdminViewUserPopupComponent } from '../admin-view-user-popup/admin-view
 import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { LocalstorageService, UserData } from '../localstorage.service';
 import { UserService } from '../user.service';
-import {MatIconModule} from '@angular/material/icon';
+import { GlobalComponent } from 'src/global-component';
 @Component({
   selector: 'app-admin-crud-user-form',
   templateUrl: './admin-crud-user-form.component.html',
@@ -33,7 +33,7 @@ export class AdminCrudUserFormComponent implements OnInit {
   
   ngOnInit(): void {
     this.isLoading=true;
-    let url="https://calm-hamlet-62154.herokuapp.com/user/get";
+    let url=GlobalComponent.apiUrl+"user/get";
     this.userService.Awake(url).subscribe(
       (r:any)=>{
        
@@ -88,7 +88,7 @@ export class AdminCrudUserFormComponent implements OnInit {
     DeleteDialogRef.afterClosed().subscribe(r=>{
       if(r){
         this.isLoading=true;
-        let url='https://calm-hamlet-62154.herokuapp.com/user/deleteaccount';
+        let url=GlobalComponent.apiUrl+'user/deleteaccount';
         console.log('id: ',data.row.id);
         this.userService.DeleteAccount(url,{id:data.row.id}).subscribe(
           r=>{
@@ -109,7 +109,7 @@ export class AdminCrudUserFormComponent implements OnInit {
 
   Logout(){
     this.isLoading=true;
-    let url='http://localhost:5000/user/logout';
+    let url=GlobalComponent.apiUrl+'user/logout';
     this.userService.SignOut(url);
     this.storageService.SetCurrentUser=null;
     this.router.navigate(['/'])
