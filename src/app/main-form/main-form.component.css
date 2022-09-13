@@ -2,3 +2,8 @@
     display: flex;
     justify-content: space-between;
 }
+#body{
+
+    display: flex; flex-direction: row; width: 20%;justify-content: space-between;justify-items: flex-start;
+
+}

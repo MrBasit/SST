@@ -35,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { AdminCrudUserFormComponent } from './admin-crud-user-form/admin-crud-user-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { SetsCrudFormComponent } from './sets-crud-form/sets-crud-form.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AdminCreateUserFormComponent,
     AdminViewUserPopupComponent,
     AdminCrudUserFormComponent,
+    SetsCrudFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -85,7 +87,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
       {path:'adminmain',component:AdminMainFormComponent},
       {path:'adminupdate',component:AdminUpdateFormComponent,data:{data:{}}},
       {path:'createuser',component:AdminCreateUserFormComponent},
-      {path:'edituser',component:AdminCrudUserFormComponent}
+      {path:'edituser',component:AdminCrudUserFormComponent},
+      {path:'setsuser',component:SetsCrudFormComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService,{provide:LocationStrategy,useClass:HashLocationStrategy}],
