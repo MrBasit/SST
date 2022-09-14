@@ -69,6 +69,20 @@ export class UserService {
     }
     return this.http.delete(url,options);
   }
+
+  GetSets(url:string,body:{}){
+    this.Autorization=this.storageService.GetCurrentuesr.accessToken;
+    let header = new HttpHeaders(
+      {'Authorization':'Bearer '+this.Autorization,
+      'Content-Type': 'application/json'  
+    }
+    );
+    let options = {
+      headers:header
+    }
+    return this.http.post(url,body,options);
+  }
+
   SignOut(url:string){
     this.Autorization=this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(
@@ -79,4 +93,6 @@ export class UserService {
     }
     return this.http.get(url,options);
   }
+
+  
 }
