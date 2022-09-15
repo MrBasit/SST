@@ -50,6 +50,23 @@
         </ng-container>
 
 
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="Stakeholders">
+          <th mat-header-cell *matHeaderCellDef style="width: 20%;">Set Stakeholders Management
+          </th>
+          <td mat-cell *matCellDef="let row" style="width: 15%;">
+            <button class="submit-button" mat-button type="submit" color="primary">Manage Stakeholders</button>
+          </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="Objectives">
+          <th mat-header-cell *matHeaderCellDef style="width: 20%;">Set Objectives Management
+          </th>
+          <td mat-cell *matCellDef="let row" style="width: 15%;">
+            <button class="submit-button" mat-button type="submit" color="primary">Manage Objectives</button>
+          </td>
+        </ng-container>
 
 
         <!-- Edit Column -->
@@ -85,14 +102,7 @@
           </td>
         </ng-container>
 
-        <!-- Last Name Column -->
-        <ng-container matColumnDef="Stakeholders">
-          <th mat-header-cell *matHeaderCellDef style="width: 15%;">
-          </th>
-          <td mat-cell *matCellDef="let row" style="width: 15%;">
-            <button class="submit-button" mat-button type="submit" color="primary">Manage Stakeholders</button>
-          </td>
-        </ng-container>
+
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

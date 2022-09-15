@@ -26,7 +26,7 @@ export class SetsCrudFormComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'description', 'Edit', 'View', 'Delete', 'Stakeholders'];
+  displayedColumns: string[] = ['name', 'description', 'Stakeholders', 'Objectives', 'Edit', 'View', 'Delete'];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
