@@ -26,7 +26,7 @@
 
         <mat-form-field class="control" appearance="fill">
             <mat-label>Set Name</mat-label>
-            <input matInput type="text" [formControl]="setName" placeholder="My Set">
+            <textarea matInput type="text" [formControl]="setName" placeholder="My Set" maxlength="40"></textarea>
             <mat-error *ngIf="setName?.hasError('required')">
                 Set Name is <strong>required</strong>
             </mat-error>
@@ -34,7 +34,7 @@
         <br>
         <mat-form-field class="control" appearance="fill">
             <mat-label>Set Description</mat-label>
-            <input matInput type="text" [formControl]="Description" placeholder="My Set Description...">
+            <textarea matInput type="text" [formControl]="Description" placeholder="My Set Description..." rows="10" cols="50" maxlength="500"></textarea>
             <mat-error *ngIf="Description?.hasError('required')">
                 Description is <strong>required</strong>
             </mat-error>

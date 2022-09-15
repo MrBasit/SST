@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-set-view-component-pop-up',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetViewComponentPopUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private storageService:LocalstorageService) { }
+
+  setInfo:any={}
+  isActive:boolean=false;
 
   ngOnInit(): void {
+
+    this.setInfo=this.storageService.GetUserSet;
+    
+
   }
 
 }
