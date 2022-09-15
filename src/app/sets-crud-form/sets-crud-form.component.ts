@@ -5,9 +5,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/global-component';
+import { AdminViewUserPopupComponent } from '../admin-view-user-popup/admin-view-user-popup.component';
 import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { DeleteSetPopUpComponent } from '../delete-set-pop-up/delete-set-pop-up.component';
 import { LocalstorageService, UserData } from '../localstorage.service';
+import { SetViewComponentPopUpComponent } from '../set-view-component-pop-up/set-view-component-pop-up.component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -57,6 +59,18 @@ export class SetsCrudFormComponent implements OnInit {
   }
 
   viewData(data: any) {
+
+
+    this.storageService.SetUserSet = data;
+
+    let ViewDialogRef = this.dialog.open(SetViewComponentPopUpComponent, {
+      data: data
+    })
+    ViewDialogRef.afterOpened().subscribe(r => {
+      r = data;
+      //console.log(r);
+    })
+
 
   }
 

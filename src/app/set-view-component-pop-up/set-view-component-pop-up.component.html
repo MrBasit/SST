@@ -1,0 +1,64 @@
+<div style="width: 600px;height: 300px; position: relative; font-size: 14px;">
+
+    <h3>User Details</h3>
+    <br>
+    <br>
+    <div
+        style="width: 100%;display: flex;flex-direction: column; justify-content: space-between;align-items: flex-start;">
+        <div
+            style="height: 20%;display: flex; flex-direction: row;justify-content: space-between;align-items: flex-start;width: 100%;">
+
+            <div style="width: 50%;align-items: flex-start;display: flex; flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;"> Status</p>
+                <div [hidden]="!isActive">
+                    <p style="color: green;"><strong>Active</strong></p>
+                </div>
+                <div [hidden]="isActive">
+                    <p style="color: red;"><strong>Not Active</strong></p>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div
+            style="height: 30%;display: flex; flex-direction: row;justify-content: space-between;align-items: flex-start;width: 100%">
+            <div style="align-items: flex-start;display: flex;flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;">Username</p>
+
+                <h4>{{setInfo.row.username}}</h4>
+            </div>
+            <div style="align-items: flex-start;display: flex;flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;">First Name</p>
+
+                <h4>{{setInfo.row.firstName}}</h4>
+            </div>
+            <div style="align-items: flex-start;display: flex; flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;">Last Name</p>
+
+                <h4>{{setInfo.row.lastName}}</h4>
+            </div>
+            <div style="align-items: flex-start;display: flex; flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;">Email</p>
+
+                <h4>{{setInfo.row.email}}</h4>
+            </div>
+        </div>
+        <br>
+
+        <div
+            style="height: 30%;display: flex; flex-direction: row;justify-content: space-between;align-items: flex-start;width: 100%">
+            <div style="align-items: flex-start;display: flex;flex-direction: column;">
+                <p style="font-size: 12px; color: gray;margin-bottom: 10px;">Account Type</p>
+
+                <h4>{{setInfo.row.isAdmin}}</h4>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <div style="position: absolute; bottom: 0px;">
+        <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+
+    </div>
+</div>

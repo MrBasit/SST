@@ -39,6 +39,7 @@ import { SetsCrudFormComponent } from './sets-crud-form/sets-crud-form.component
 import { AddSetComponent } from './add-set/add-set.component';
 import { EditSetComponent } from './edit-set/edit-set.component';
 import { DeleteSetPopUpComponent } from './delete-set-pop-up/delete-set-pop-up.component';
+import { SetViewComponentPopUpComponent } from './set-view-component-pop-up/set-view-component-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { DeleteSetPopUpComponent } from './delete-set-pop-up/delete-set-pop-up.c
     AddSetComponent,
     EditSetComponent,
     DeleteSetPopUpComponent,
+    SetViewComponentPopUpComponent,
   ],
   imports: [
     HttpClientModule,
