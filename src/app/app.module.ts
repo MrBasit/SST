@@ -36,6 +36,9 @@ import { AdminCrudUserFormComponent } from './admin-crud-user-form/admin-crud-us
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SetsCrudFormComponent } from './sets-crud-form/sets-crud-form.component';
+import { AddSetComponent } from './add-set/add-set.component';
+import { EditSetComponent } from './edit-set/edit-set.component';
+import { DeleteSetPopUpComponent } from './delete-set-pop-up/delete-set-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ import { SetsCrudFormComponent } from './sets-crud-form/sets-crud-form.component
     AdminViewUserPopupComponent,
     AdminCrudUserFormComponent,
     SetsCrudFormComponent,
+    AddSetComponent,
+    EditSetComponent,
+    DeleteSetPopUpComponent,
   ],
   imports: [
     HttpClientModule,
@@ -88,7 +94,9 @@ import { SetsCrudFormComponent } from './sets-crud-form/sets-crud-form.component
       {path:'adminupdate',component:AdminUpdateFormComponent,data:{data:{}}},
       {path:'createuser',component:AdminCreateUserFormComponent},
       {path:'edituser',component:AdminCrudUserFormComponent},
-      {path:'setsuser',component:SetsCrudFormComponent}
+      {path:'setsuser',component:SetsCrudFormComponent},
+      {path:'addSet',component:AddSetComponent},
+      {path:'editSet',component:EditSetComponent}
     ])
   ],
   providers: [UserService,HttpClient,LocalstorageService,{provide:LocationStrategy,useClass:HashLocationStrategy}],

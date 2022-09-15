@@ -16,6 +16,19 @@ export class LocalstorageService {
       localStorage.setItem('CurrentUser',JSON.stringify(value))        
     }
   }
+
+  public set SetUserSet(value:any){
+    if(value==null){
+      localStorage.removeItem('UserSet');
+    }
+    else{
+      localStorage.setItem('UserSet',JSON.stringify(value))        
+    }
+  }
+  public get GetUserSet(){
+     let a = localStorage.getItem('UserSet') as string;
+     return JSON.parse(a) as UserSet;
+  }
   
   public get GetCurrentuesr(){
      let a = localStorage.getItem('CurrentUser') as string;
@@ -48,3 +61,9 @@ export interface UserData{
   "isAdmin":string
 }
 
+export interface UserSet{
+  "id":string,
+  "name":string,
+  "description":string,
+  "userId":string
+}

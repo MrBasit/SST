@@ -13,7 +13,7 @@
 .mainTopButtons {
     display: flex;
     flex-direction: row;
-    width: 26%;
+    width: 27%;
     justify-content: space-between;
     justify-items: flex-start;
 }

@@ -1,12 +1,110 @@
 <div *ngIf="isLoading" class="loader">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-spinner></mat-spinner>
+</div>
 <div id="Header" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
   <div style="width: 33%; display: flex;flex-direction: row; align-items: center;justify-content: flex-start;">
-    
+
     <button routerLink="/main" mat-icon-button aria-label="Example icon button with a home icon">
       <mat-icon style="font-size: 22px;">keyboard_arrow_left</mat-icon>
-  </button>
-  <h3>StackHolder Specification Tool</h3>
+    </button>
+    <h3>StackHolder Specification Tool</h3>
   </div>
-<h2 style="text-align: center;width: 33%;">Sets Management</h2>
+  <h2 style="text-align: center;width: 33%;">Sets Management</h2>
+</div>
+<div class="main">
+
+  <div class="mainTop">
+
+
+    <div class="mainTopButtons">
+      <button routerLink="/addSet" mat-raised-button color="primary">Create New Set</button>
+      <button mat-raised-button color="primary" (click)="changeView()" *ngIf="!isView">View Mode</button>
+      <button mat-raised-button color="primary" (click)="changeView()" *ngIf="isView">Edit Mode</button>
+    </div>
+  </div>
+
+  <div style="width: 95%; font-size: 14px;">
+
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search By Name OR Description" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+
+      <table mat-table [dataSource]="data" matSort matSortActive="username" matSortDirection="asc" matSortDisableClear>
+
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Name </th>
+          <td mat-cell *matCellDef="let row" style="width: 20%;"> {{row.name}} </td>
+        </ng-container>
+
+
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Description </th>
+          <td mat-cell *matCellDef="let row" style="width: 30%;"> {{row.description}} </td>
+        </ng-container>
+
+
+
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="Edit">
+          <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> Edit </th>
+          <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView">
+            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+              (click)="onEdit({row})">
+              <mat-icon style="font-size: 22px;">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- View Column -->
+        <ng-container matColumnDef="View">
+          <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> View </th>
+          <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView">
+            <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+              (click)="viewData({row})">
+              <mat-icon color="primary" style="font-size: 22px;">remove_red_eye</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="Delete">
+          <th mat-header-cell *matHeaderCellDef style="width: 5%;" [hidden]="isView"> Delete </th>
+          <td mat-cell *matCellDef="let row" style="width: 5%;" [hidden]="isView">
+            <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+              (click)="onDelete({row})">
+              <mat-icon style="font-size: 22px;">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="Stakeholders">
+          <th mat-header-cell *matHeaderCellDef style="width: 15%;">
+          </th>
+          <td mat-cell *matCellDef="let row" style="width: 15%;">
+            <button class="submit-button" mat-button type="submit" color="primary">Manage Stakeholders</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the Search <strong>{{input.value}}</strong></td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+  </div>
+</div>
