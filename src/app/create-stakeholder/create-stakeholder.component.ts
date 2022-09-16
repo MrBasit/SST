@@ -40,6 +40,9 @@ export class CreateStakeholderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    console.log(this.storageService.GetUserSet);
+
   }
 
   onSubmit() {
@@ -47,9 +50,9 @@ export class CreateStakeholderComponent implements OnInit {
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-      let url = GlobalComponent.apiUrl + "set/addSet";
+      let url = GlobalComponent.apiUrl + "stakeholder/addStakeholder";
       let body = {
-        userId: this.CurrentUser.id,
+        setId: this.storageService.GetUserSet.id,
         name: this.addSetForm.value['setName'],
         description: this.addSetForm.value['Description'],
       }
@@ -69,7 +72,7 @@ export class CreateStakeholderComponent implements OnInit {
             this.Error = null;
             console.log(r);
             this.isSignupSuccessfull = true;
-            this.router.navigate(['/setsuser'])
+            this.router.navigate(['/stakeholdersUser'])
           }
         },
         (e: any) => {

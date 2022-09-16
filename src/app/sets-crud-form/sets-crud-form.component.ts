@@ -60,7 +60,7 @@ export class SetsCrudFormComponent implements OnInit {
 
   viewData(data: any) {
 
-
+    console.log(data);
     this.storageService.SetUserSet = data;
 
     let ViewDialogRef = this.dialog.open(SetViewComponentPopUpComponent, {

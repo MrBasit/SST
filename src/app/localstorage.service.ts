@@ -25,11 +25,30 @@ export class LocalstorageService {
       localStorage.setItem('UserSet',JSON.stringify(value))        
     }
   }
+
+
+  public get GetUserStakeholder(){
+     let a = localStorage.getItem('UserStakeholder') as string;
+     return JSON.parse(a) as UserSet;
+  }
+  
+  public set SetUserStakeholder(value:any){
+    if(value==null){
+      localStorage.removeItem('UserStakeholder');
+    }
+    else{
+      localStorage.setItem('UserStakeholder',JSON.stringify(value))        
+    }
+  }
+
+
   public get GetUserSet(){
      let a = localStorage.getItem('UserSet') as string;
      return JSON.parse(a) as UserSet;
   }
   
+
+
   public get GetCurrentuesr(){
      let a = localStorage.getItem('CurrentUser') as string;
      return JSON.parse(a) as User;
@@ -67,3 +86,10 @@ export interface UserSet{
   "description":string,
   "userId":string
 }
+
+export interface UserStakeholder{
+  "id":string,
+  "name":string,
+  "description":string
+}
+

@@ -6,8 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/global-component';
 import { DeleteSetPopUpComponent } from '../delete-set-pop-up/delete-set-pop-up.component';
-import { LocalstorageService, UserData } from '../localstorage.service';
+import { LocalstorageService, UserData, UserSet, UserStakeholder } from '../localstorage.service';
 import { SetViewComponentPopUpComponent } from '../set-view-component-pop-up/set-view-component-pop-up.component';
+import { StakeholderViewPopUpComponent } from '../stakeholder-view-pop-up/stakeholder-view-pop-up.component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -32,23 +33,24 @@ export class StakeholdersCrudFormComponent implements OnInit {
   isView: Boolean = false;
   pageSize: number = 2;
   isEdit: boolean = false;
-  public data: MatTableDataSource<UserData>;
+  public data: MatTableDataSource<UserStakeholder>;
 
 
   ngOnInit(): void {
     this.isLoading = true;
-    let url = GlobalComponent.apiUrl + "set/getSets";
+    let url = GlobalComponent.apiUrl + "stakeholder/getStakeholders";
     let body = {
-      userId: this.CurrentUser.id
-    }
+      setId: this.storageService.GetUserSet.id
+    };
+    console.log(body);
     this.userService.GetSets(url, body).subscribe(
       (r: any) => {
 
-        this.data = r.responseBody.setResponseDTOS;
+        this.data = r.responseBody.stakeholderResponseDTOS;
         this.resultsLength = r.length;
-        console.log(r.responseBody.setResponseDTOS);
+        console.log(this.data);
         this.isLoading = false;
-        this.data = new MatTableDataSource(r.responseBody.setResponseDTOS);
+        this.data = new MatTableDataSource(r.responseBody.stakeholderResponseDTOS);
         this.data.paginator = this.paginator;
         this.data.sort = this.sort;
 
@@ -58,10 +60,11 @@ export class StakeholdersCrudFormComponent implements OnInit {
 
   viewData(data: any) {
 
+    console.log(data.row);
+    this.storageService.SetUserStakeholder = data;
+    
 
-    this.storageService.SetUserSet = data;
-
-    let ViewDialogRef = this.dialog.open(SetViewComponentPopUpComponent, {
+    let ViewDialogRef = this.dialog.open(StakeholderViewPopUpComponent, {
       data: data
     })
     ViewDialogRef.afterOpened().subscribe(r => {
@@ -82,10 +85,10 @@ export class StakeholdersCrudFormComponent implements OnInit {
     DeleteDialogRef.afterClosed().subscribe(r => {
       if (r) {
         this.isLoading = true;
-        let url = GlobalComponent.apiUrl + 'set/deleteSet';
+        let url = GlobalComponent.apiUrl + 'stakeholder/deleteStakeholder';
         console.log('id: ', data.row.id);
         let body = {
-          setId: data.row.id
+          stakeholderId: data.row.id
         }
         this.userService.DeleteAccount(url, body).subscribe(
           (r: any) => {

@@ -26,7 +26,7 @@
 
         <mat-form-field class="control" appearance="fill">
             <mat-label>Stakeholder Name</mat-label>
-            <textarea matInput type="text" [formControl]="setName" placeholder="My Set" maxlength="40" rows="1"
+            <textarea matInput type="text" [formControl]="setName" placeholder="My Stakeholder" maxlength="40" rows="1"
                 cols="40"></textarea>
             <mat-error *ngIf="setName?.hasError('required')">
                 Set Name is <strong>required</strong>
@@ -35,7 +35,7 @@
         <br>
         <mat-form-field class="control" appearance="fill">
             <mat-label>Stakeholder Description</mat-label>
-            <textarea matInput type="text" [formControl]="Description" placeholder="My Set Description..." rows="10"
+            <textarea matInput type="text" [formControl]="Description" placeholder="My Stakeholder Description..." rows="10"
                 cols="50" maxlength="500"></textarea>
             <mat-error *ngIf="Description?.hasError('required')">
                 Description is <strong>required</strong>
@@ -45,7 +45,7 @@
 
         <div style="display: flex;flex-direction: row; justify-content: space-between;">
             <button routerLink="/stakeholdersUser" mat-button>Cancel</button>
-            <button class="submit-button" mat-raised-button type="submit" color="primary">Create Set</button>
+            <button class="submit-button" mat-raised-button type="submit" color="primary">Create Stakeholder</button>
 
         </div>
 

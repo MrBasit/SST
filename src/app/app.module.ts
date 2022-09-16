@@ -44,6 +44,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { StakeholdersCrudFormComponent } from './stakeholders-crud-form/stakeholders-crud-form.component';
 import { CreateStakeholderComponent } from './create-stakeholder/create-stakeholder.component';
+import { StakeholderViewPopUpComponent } from './stakeholder-view-pop-up/stakeholder-view-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CreateStakeholderComponent } from './create-stakeholder/create-stakehol
     SetViewComponentPopUpComponent,
     StakeholdersCrudFormComponent,
     CreateStakeholderComponent,
+    StakeholderViewPopUpComponent,
   ],
   imports: [
     HttpClientModule,
