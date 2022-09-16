@@ -13,39 +13,40 @@ import { UserService } from '../user.service';
 })
 export class MainFormComponent implements OnInit {
 
-  constructor(public router:Router, public dialog:MatDialog, public storageService:LocalstorageService,public userService:UserService) { }
-  CurrentUser:any={};
+  constructor(public router: Router, public dialog: MatDialog, public storageService: LocalstorageService, public userService: UserService) { }
+  CurrentUser: any = {};
+
 
   ngOnInit(): void {
     this.CurrentUser = this.storageService.GetCurrentuesr;
   }
-  isLoading:boolean=false;
+  isLoading: boolean = false;
 
-  onSignoutClick(){
-    this.isLoading=true;
-    let url=GlobalComponent.apiUrl+'user/logout';
+  onSignoutClick() {
+    this.isLoading = true;
+    let url = GlobalComponent.apiUrl + 'user/logout';
     this.userService.SignOut(url);
-    this.storageService.SetCurrentUser=null;
+    this.storageService.SetCurrentUser = null;
     this.router.navigate(['/'])
-    
+
   }
 
-  onDeleteAccountClick(){
-    let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent,{
-      data:null
+  onDeleteAccountClick() {
+    let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent, {
+      data: null
     })
-    DeleteDialogRef.afterClosed().subscribe(r=>{
-      if(r){
-        this.isLoading=true;
-        let url=GlobalComponent.apiUrl+'user/deleteaccount';
-        console.log('id: ',this.CurrentUser.id);
-        this.userService.DeleteAccount(url,{id:this.CurrentUser.id}).subscribe(
-          r=>{
-            this.storageService.SetCurrentUser=null;
+    DeleteDialogRef.afterClosed().subscribe(r => {
+      if (r) {
+        this.isLoading = true;
+        let url = GlobalComponent.apiUrl + 'user/deleteaccount';
+        console.log('id: ', this.CurrentUser.id);
+        this.userService.DeleteAccount(url, { id: this.CurrentUser.id }).subscribe(
+          r => {
+            this.storageService.SetCurrentUser = null;
             console.log(r),
-            this.router.navigate(['/signin'])
+              this.router.navigate(['/signin'])
           },
-          e=>{
+          e => {
             console.log(e);
           }
         )

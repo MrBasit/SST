@@ -7,11 +7,11 @@ import { MainFormComponent } from './main-form/main-form.component';
 import { SigninFormComponent } from './signin-form/signin-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {FormsModule,ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule } from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
@@ -23,7 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LocalstorageService } from './localstorage.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForgotpasswordFormComponent } from './forgotpassword-form/forgotpassword-form.component';
-import {MatStepper, MatStepperModule, MatVerticalStepper} from '@angular/material/stepper';
+import { MatStepper, MatStepperModule, MatVerticalStepper } from '@angular/material/stepper';
 import { InitialHeaderComponent } from './initial-header/initial-header.component';
 import { AdminMainFormComponent } from './admin-main-form/admin-main-form.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -40,6 +40,10 @@ import { AddSetComponent } from './add-set/add-set.component';
 import { EditSetComponent } from './edit-set/edit-set.component';
 import { DeleteSetPopUpComponent } from './delete-set-pop-up/delete-set-pop-up.component';
 import { SetViewComponentPopUpComponent } from './set-view-component-pop-up/set-view-component-pop-up.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { StakeholdersCrudFormComponent } from './stakeholders-crud-form/stakeholders-crud-form.component';
+import { CreateStakeholderComponent } from './create-stakeholder/create-stakeholder.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,8 @@ import { SetViewComponentPopUpComponent } from './set-view-component-pop-up/set-
     EditSetComponent,
     DeleteSetPopUpComponent,
     SetViewComponentPopUpComponent,
+    StakeholdersCrudFormComponent,
+    CreateStakeholderComponent,
   ],
   imports: [
     HttpClientModule,
@@ -84,24 +90,28 @@ import { SetViewComponentPopUpComponent } from './set-view-component-pop-up/set-
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
+    MatCardModule,
+    MatDividerModule,
     RouterModule.forRoot([
-      {path:'',component:InitialFormComponent},
-      {path:'signin',component:SigninFormComponent},
-      {path:'signup',component:SignupFormComponent},
-      {path:'main',component:MainFormComponent},
-      {path:'changepassword',component:ChangePasswordFormComponent},
-      {path:'updateaccount',component:UpdateAccountFormComponent},
-      {path:'forgotpassword',component:ForgotpasswordFormComponent},
-      {path:'adminmain',component:AdminMainFormComponent},
-      {path:'adminupdate',component:AdminUpdateFormComponent,data:{data:{}}},
-      {path:'createuser',component:AdminCreateUserFormComponent},
-      {path:'edituser',component:AdminCrudUserFormComponent},
-      {path:'setsuser',component:SetsCrudFormComponent},
-      {path:'addSet',component:AddSetComponent},
-      {path:'editSet',component:EditSetComponent}
+      { path: '', component: InitialFormComponent },
+      { path: 'signin', component: SigninFormComponent },
+      { path: 'signup', component: SignupFormComponent },
+      { path: 'main', component: MainFormComponent },
+      { path: 'changepassword', component: ChangePasswordFormComponent },
+      { path: 'updateaccount', component: UpdateAccountFormComponent },
+      { path: 'forgotpassword', component: ForgotpasswordFormComponent },
+      { path: 'adminmain', component: AdminMainFormComponent },
+      { path: 'adminupdate', component: AdminUpdateFormComponent, data: { data: {} } },
+      { path: 'createuser', component: AdminCreateUserFormComponent },
+      { path: 'edituser', component: AdminCrudUserFormComponent },
+      { path: 'setsuser', component: SetsCrudFormComponent },
+      { path: 'addSet', component: AddSetComponent },
+      { path: 'editSet', component: EditSetComponent },
+      { path: 'stakeholdersUser', component: StakeholdersCrudFormComponent },
+      { path: 'createStakeholder', component: CreateStakeholderComponent }
     ])
   ],
-  providers: [UserService,HttpClient,LocalstorageService,{provide:LocationStrategy,useClass:HashLocationStrategy}],
+  providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

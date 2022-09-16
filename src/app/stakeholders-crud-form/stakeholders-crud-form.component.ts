@@ -5,19 +5,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/global-component';
-import { AdminViewUserPopupComponent } from '../admin-view-user-popup/admin-view-user-popup.component';
-import { DeleteAccountPopupComponent } from '../delete-account-popup/delete-account-popup.component';
 import { DeleteSetPopUpComponent } from '../delete-set-pop-up/delete-set-pop-up.component';
-import { LocalstorageService, UserData, UserSet } from '../localstorage.service';
+import { LocalstorageService, UserData } from '../localstorage.service';
 import { SetViewComponentPopUpComponent } from '../set-view-component-pop-up/set-view-component-pop-up.component';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-sets-crud-form',
-  templateUrl: './sets-crud-form.component.html',
-  styleUrls: ['./sets-crud-form.component.css']
+  selector: 'app-stakeholders-crud-form',
+  templateUrl: './stakeholders-crud-form.component.html',
+  styleUrls: ['./stakeholders-crud-form.component.css']
 })
-export class SetsCrudFormComponent implements OnInit {
+export class StakeholdersCrudFormComponent implements OnInit {
 
 
   constructor(public router: Router, public dialog: MatDialog, public storageService: LocalstorageService, public userService: UserService) {
@@ -28,13 +26,13 @@ export class SetsCrudFormComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'description', 'Stakeholders', 'Objectives', 'Edit', 'View', 'Delete'];
+  displayedColumns: string[] = ['name', 'description', 'Objectives', 'Edit', 'View', 'Delete'];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
   pageSize: number = 2;
   isEdit: boolean = false;
-  public data: MatTableDataSource<UserSet>;
+  public data: MatTableDataSource<UserData>;
 
 
   ngOnInit(): void {
@@ -74,12 +72,6 @@ export class SetsCrudFormComponent implements OnInit {
 
   }
 
-  goToStakeholder(data: any) {
-
-    this.storageService.SetUserSet = data.row;
-    console.log(this.storageService.GetUserSet);
-  }
-
   onDelete(data: any) {
 
     console.log(data);
@@ -96,11 +88,11 @@ export class SetsCrudFormComponent implements OnInit {
           setId: data.row.id
         }
         this.userService.DeleteAccount(url, body).subscribe(
-          r => {
+          (r: any) => {
             console.log(r),
               this.ngOnInit();
           },
-          e => {
+          (e: any) => {
             console.log(e);
           }
         )

@@ -14,7 +14,7 @@
 <div id="body" style="text-align: center;">
     <div>
         <mat-error [hidden]="!Error" style="font-size: 13px;align-items: center;">
-            <span>{{Error?.error?.error}}</span>
+            <span>{{Error}}</span>
             <br>
         </mat-error>
         <mat-error [hidden]="!Error2" style="font-size: 13px;align-items: center;">
@@ -26,7 +26,8 @@
 
         <mat-form-field class="control" appearance="fill">
             <mat-label>Set Name</mat-label>
-            <textarea matInput type="text" [formControl]="setName" placeholder="My Set" maxlength="40"></textarea>
+            <textarea matInput type="text" [formControl]="setName" placeholder="My Set" maxlength="40" rows="1"
+                cols="40"></textarea>
             <mat-error *ngIf="setName?.hasError('required')">
                 Set Name is <strong>required</strong>
             </mat-error>
@@ -34,7 +35,8 @@
         <br>
         <mat-form-field class="control" appearance="fill">
             <mat-label>Set Description</mat-label>
-            <textarea matInput type="text" [formControl]="Description" placeholder="My Set Description..." rows="10" cols="50" maxlength="500"></textarea>
+            <textarea matInput type="text" [formControl]="Description" placeholder="My Set Description..." rows="10"
+                cols="50" maxlength="500"></textarea>
             <mat-error *ngIf="Description?.hasError('required')">
                 Description is <strong>required</strong>
             </mat-error>

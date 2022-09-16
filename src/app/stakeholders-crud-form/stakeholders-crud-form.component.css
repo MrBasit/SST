@@ -1,6 +1,8 @@
-#Header {
+.main {
+    flex-direction: column;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .mainTop {
@@ -14,18 +16,25 @@
 .mainTopButtons {
     display: flex;
     flex-direction: row;
-    width: 27%;
+    width: 23%;
     justify-content: space-between;
     justify-items: flex-start;
 }
 
-.main {
-    flex-direction: column;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+table {
+    width: 100%;
+    table-layout: fixed;
 }
 
-.example-card {
-    max-width: 300px;
+th,
+td {
+    overflow: hidden;
+    width: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
 }

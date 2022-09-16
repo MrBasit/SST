@@ -1,6 +1,6 @@
 <div *ngIf="isLoading" class="loader">
     <mat-spinner></mat-spinner>
-  </div>
+</div>
 <div id="Header">
     <h3>StackHolder Specification Tool</h3>
     <h3>User Dashboard</h3>
@@ -12,21 +12,34 @@
         <button (click)="onSignoutClick()" mat-menu-item>Sign Out</button>
     </mat-menu>
     <mat-menu #AccountMenu="matMenu">
-        <button routerLink="/changepassword"mat-menu-item>Change Password</button>
+        <button routerLink="/changepassword" mat-menu-item>Change Password</button>
         <button routerLink="/updateaccount" mat-menu-item>Update Account</button>
         <button (click)="onDeleteAccountClick()" mat-menu-item>Delete Account</button>
     </mat-menu>
 </div>
 
 <div class="main">
-<div class="mainTop">
-    <!-- <div style="width: 30%;">
+    <div class="mainTop">
+        <!-- <div style="width: 30%;">
   <p style="font-size: 14px;">Sorted By : <strong>Username</strong></p>
 </div>   -->
 
-    <div class="mainTopButtons">
-        <button routerLink="/setsuser" mat-raised-button color="primary">Manage Your Sets</button>
-        <button mat-raised-button color="primary">Manage Your Objectives</button>
+        <div class="mainTopButtons">
+            <!-- <button routerLink="/setsuser" mat-raised-button color="primary">Manage Your Sets</button> -->
+            <mat-card class="example-card">
+                <mat-card-subtitle>Create, Delete, or Update your Sets</mat-card-subtitle>
+                <mat-card-title>Sets Management</mat-card-title>
+                <br>
+                <mat-card-content>
+                    <p>In Sets you can manage your sets. Sets also let you to manage Stakeholders and Objectives</p>
+                    <!-- <p>{{ longText }}</p> -->
+                </mat-card-content>
+
+                <mat-divider inset></mat-divider>
+                <mat-card-actions>
+                    <button routerLink="/setsuser" mat-button color="primary">Manage Sets</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
-</div>
 </div>
