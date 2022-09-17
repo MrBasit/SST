@@ -80,6 +80,11 @@ export class SetsCrudFormComponent implements OnInit {
     console.log(this.storageService.GetUserSet);
   }
 
+  goToObjective(data:any){
+    this.storageService.SetUserSet = data.row;
+    console.log(this.storageService.GetUserSet);
+  }
+
   onDelete(data: any) {
 
     console.log(data);

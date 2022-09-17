@@ -45,6 +45,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { StakeholdersCrudFormComponent } from './stakeholders-crud-form/stakeholders-crud-form.component';
 import { CreateStakeholderComponent } from './create-stakeholder/create-stakeholder.component';
 import { StakeholderViewPopUpComponent } from './stakeholder-view-pop-up/stakeholder-view-pop-up.component';
+import { ObjectivesCrudFormComponent } from './objectives-crud-form/objectives-crud-form.component';
+import { StakeholderDeletePopUpComponent } from './stakeholder-delete-pop-up/stakeholder-delete-pop-up.component';
+import { ObjectiveDeletePopUpComponent } from './objective-delete-pop-up/objective-delete-pop-up.component';
+import { ObjectiveViewPopUpComponent } from './objective-view-pop-up/objective-view-pop-up.component';
+import { EditStakeholderComponent } from './edit-stakeholder/edit-stakeholder.component';
+import { EditObjectiveComponent } from './edit-objective/edit-objective.component';
+import { CreateObjectiveComponent } from './create-objective/create-objective.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +78,13 @@ import { StakeholderViewPopUpComponent } from './stakeholder-view-pop-up/stakeho
     StakeholdersCrudFormComponent,
     CreateStakeholderComponent,
     StakeholderViewPopUpComponent,
+    ObjectivesCrudFormComponent,
+    StakeholderDeletePopUpComponent,
+    ObjectiveDeletePopUpComponent,
+    ObjectiveViewPopUpComponent,
+    EditStakeholderComponent,
+    EditObjectiveComponent,
+    CreateObjectiveComponent,
   ],
   imports: [
     HttpClientModule,
@@ -110,7 +124,11 @@ import { StakeholderViewPopUpComponent } from './stakeholder-view-pop-up/stakeho
       { path: 'addSet', component: AddSetComponent },
       { path: 'editSet', component: EditSetComponent },
       { path: 'stakeholdersUser', component: StakeholdersCrudFormComponent },
-      { path: 'createStakeholder', component: CreateStakeholderComponent }
+      { path: 'createStakeholder', component: CreateStakeholderComponent },
+      { path: 'objectivesUser', component:ObjectivesCrudFormComponent},
+      { path: 'editStakeholder',  component:EditStakeholderComponent},
+      { path: 'editObjective', component:EditObjectiveComponent},
+      { path: 'createObjective', component:CreateObjectiveComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],

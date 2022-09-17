@@ -19,7 +19,8 @@ export class CreateStakeholderComponent implements OnInit {
   Error: any = null;
   Error2: any = null;
   regex: any = null;
-  CurrentUser: any = {}
+  CurrentUser: any = {};
+  trimmedName:string="";
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
@@ -51,9 +52,11 @@ export class CreateStakeholderComponent implements OnInit {
       this.isLoading = true;
       console.log(this.addSetForm.value);
       let url = GlobalComponent.apiUrl + "stakeholder/addStakeholder";
+      this.trimmedName=this.addSetForm.value['setName'];
+      this.trimmedName=this.trimmedName.trim();
       let body = {
         setId: this.storageService.GetUserSet.id,
-        name: this.addSetForm.value['setName'],
+        name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
 

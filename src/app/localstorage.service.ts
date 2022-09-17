@@ -58,6 +58,20 @@ export class LocalstorageService {
     
   }
 
+  public get GetUserObjective(){
+    let a = localStorage.getItem('UserObjective') as string;
+    return JSON.parse(a) as UserSet;
+ }
+ 
+ public set SetUserObjective(value:any){
+   if(value==null){
+     localStorage.removeItem('UserObjective');
+   }
+   else{
+     localStorage.setItem('UserObjective',JSON.stringify(value))        
+   }
+ }
+
   
 }
 export interface User{
@@ -92,4 +106,11 @@ export interface UserStakeholder{
   "name":string,
   "description":string
 }
+
+export interface UserObjective{
+  "id":string,
+  "name":string,
+  "description":string
+}
+
 

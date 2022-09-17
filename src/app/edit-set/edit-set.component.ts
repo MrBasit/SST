@@ -18,6 +18,7 @@ export class EditSetComponent implements OnInit {
   UserSet: any = {};
   Error: any = null;
   Error2: any = null;
+  trimmedName:string="";
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
@@ -49,10 +50,12 @@ export class EditSetComponent implements OnInit {
       this.isLoading = true;
       console.log(this.addSetForm.value);
       let url = GlobalComponent.apiUrl + "set/updateSet";
+      this.trimmedName=this.addSetForm.value['setName'];
+      this.trimmedName=this.trimmedName.trim();
       let body = {
         userId: this.UserSet.userId,
         id: this.UserSet.id,
-        name: this.addSetForm.value['setName'],
+        name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
 

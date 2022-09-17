@@ -7,24 +7,22 @@ import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-add-set',
-  templateUrl: './add-set.component.html',
-  styleUrls: ['./add-set.component.css']
+  selector: 'app-edit-objective',
+  templateUrl: './edit-objective.component.html',
+  styleUrls: ['./edit-objective.component.css']
 })
-export class AddSetComponent implements OnInit {
+export class EditObjectiveComponent implements OnInit {
 
   isLoading: boolean = false;
-
-  isSignupSuccessfull = false;
+  UserSet: any = {};
   Error: any = null;
   Error2: any = null;
-  regex: any = null;
-  CurrentUser: any = {};
   trimmedName:string="";
+
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
-    this.CurrentUser = this.storageService.GetCurrentuesr;
+    this.UserSet = this.storageService.GetUserSet;
   }
 
   addSetForm = new FormGroup({
@@ -39,26 +37,30 @@ export class AddSetComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
-  }
 
+    console.log(this.storageService.GetUserSet)
+    this.setName.setValue(this.storageService.GetUserObjective.name);
+    this.Description.setValue(this.storageService.GetUserObjective.description);
+
+  }
   onSubmit() {
 
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-      let url = GlobalComponent.apiUrl + "set/addSet";
+      let url = GlobalComponent.apiUrl + "objective/updateObjective";
       this.trimmedName=this.addSetForm.value['setName'];
       this.trimmedName=this.trimmedName.trim();
       let body = {
-        userId: this.CurrentUser.id,
+        setId: this.storageService.GetUserSet.id,
+        objectiveId: this.storageService.GetUserObjective.id,
         name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
 
       console.log('body -> ', body);
-      this.userService.CreateSet(url, body).subscribe(
+      this.userService.UpdateSet(url, body).subscribe(
         (r: any) => {
           this.isLoading = false;
           if (r.responseCode != 1) {
@@ -71,14 +73,14 @@ export class AddSetComponent implements OnInit {
           else {
             this.Error = null;
             console.log(r);
-            this.isSignupSuccessfull = true;
-            this.router.navigate(['/setsuser'])
+            this.router.navigate(['/objectivesUser'])
           }
         },
-        e => {
+        (e:any) => {
           this.isLoading = false;
-          console.log('error => ', e)
+
           this.Error = e.error.responseMessage;
+          console.log('error => ', this.Error)
         }
       )
 
@@ -87,5 +89,4 @@ export class AddSetComponent implements OnInit {
       console.log('invalid form ', this.addSetForm)
     }
   }
-
 }

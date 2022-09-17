@@ -7,11 +7,11 @@ import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-add-set',
-  templateUrl: './add-set.component.html',
-  styleUrls: ['./add-set.component.css']
+  selector: 'app-create-objective',
+  templateUrl: './create-objective.component.html',
+  styleUrls: ['./create-objective.component.css']
 })
-export class AddSetComponent implements OnInit {
+export class CreateObjectiveComponent implements OnInit {
 
   isLoading: boolean = false;
 
@@ -41,6 +41,9 @@ export class AddSetComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    console.log(this.storageService.GetUserSet);
+
   }
 
   onSubmit() {
@@ -48,14 +51,16 @@ export class AddSetComponent implements OnInit {
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-      let url = GlobalComponent.apiUrl + "set/addSet";
+      let url = GlobalComponent.apiUrl + "objective/addObjective";
+      
       this.trimmedName=this.addSetForm.value['setName'];
       this.trimmedName=this.trimmedName.trim();
       let body = {
-        userId: this.CurrentUser.id,
+        setId: this.storageService.GetUserSet.id,
         name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
+      
 
       console.log('body -> ', body);
       this.userService.CreateSet(url, body).subscribe(
@@ -72,10 +77,10 @@ export class AddSetComponent implements OnInit {
             this.Error = null;
             console.log(r);
             this.isSignupSuccessfull = true;
-            this.router.navigate(['/setsuser'])
+            this.router.navigate(['/objectivesUser'])
           }
         },
-        e => {
+        (e: any) => {
           this.isLoading = false;
           console.log('error => ', e)
           this.Error = e.error.responseMessage;
@@ -87,5 +92,4 @@ export class AddSetComponent implements OnInit {
       console.log('invalid form ', this.addSetForm)
     }
   }
-
 }
