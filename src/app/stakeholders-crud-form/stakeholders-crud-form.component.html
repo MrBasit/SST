@@ -60,7 +60,7 @@
                         Objectives Management
                     </th>
                     <td mat-cell *matCellDef="let row" style="width: 15%; text-align: center;">
-                        <button class="submit-button" mat-button type="submit" color="primary">Assign
+                        <button (click)="goToAssignObjective({row})" class="submit-button" mat-button type="submit" color="primary" routerLink="/assignObjective">Assign
                             Objectives</button>
                     </td>
                 </ng-container>

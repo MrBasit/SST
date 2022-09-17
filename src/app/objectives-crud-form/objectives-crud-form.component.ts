@@ -44,7 +44,7 @@ export class ObjectivesCrudFormComponent implements OnInit {
       setId: this.storageService.GetUserSet.id
     };
     console.log(body);
-    this.userService.GetSets(url, body).subscribe(
+    this.userService.getData(url, body).subscribe(
       (r: any) => {
 
         this.data = r.responseBody.stakeholderResponseDTOS;

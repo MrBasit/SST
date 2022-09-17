@@ -52,6 +52,7 @@ import { ObjectiveViewPopUpComponent } from './objective-view-pop-up/objective-v
 import { EditStakeholderComponent } from './edit-stakeholder/edit-stakeholder.component';
 import { EditObjectiveComponent } from './edit-objective/edit-objective.component';
 import { CreateObjectiveComponent } from './create-objective/create-objective.component';
+import { AssignObjectivesComponent } from './assign-objectives/assign-objectives.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { CreateObjectiveComponent } from './create-objective/create-objective.co
     EditStakeholderComponent,
     EditObjectiveComponent,
     CreateObjectiveComponent,
+    AssignObjectivesComponent,
   ],
   imports: [
     HttpClientModule,
@@ -128,7 +130,8 @@ import { CreateObjectiveComponent } from './create-objective/create-objective.co
       { path: 'objectivesUser', component:ObjectivesCrudFormComponent},
       { path: 'editStakeholder',  component:EditStakeholderComponent},
       { path: 'editObjective', component:EditObjectiveComponent},
-      { path: 'createObjective', component:CreateObjectiveComponent}
+      { path: 'createObjective', component:CreateObjectiveComponent},
+      { path: 'assignObjective', component:AssignObjectivesComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],

@@ -44,7 +44,7 @@ export class StakeholdersCrudFormComponent implements OnInit {
       setId: this.storageService.GetUserSet.id
     };
     console.log(body);
-    this.userService.GetSets(url, body).subscribe(
+    this.userService.getData(url, body).subscribe(
       (r: any) => {
 
         this.data = r.responseBody.stakeholderResponseDTOS;
@@ -103,6 +103,13 @@ export class StakeholdersCrudFormComponent implements OnInit {
       }
     })
 
+  }
+  
+  goToAssignObjective(data:any){
+      this.storageService.SetUserStakeholder = data.row;
+      console.log(this.storageService.GetUserStakeholder);
+      console.log(this.storageService.GetCurrentuesr);
+      console.log(this.storageService.GetUserObjective);
   }
 
   onEdit(data: any) {

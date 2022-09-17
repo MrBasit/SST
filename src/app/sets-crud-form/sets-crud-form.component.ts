@@ -43,7 +43,7 @@ export class SetsCrudFormComponent implements OnInit {
     let body = {
       userId: this.CurrentUser.id
     }
-    this.userService.GetSets(url, body).subscribe(
+    this.userService.getData(url, body).subscribe(
       (r: any) => {
 
         this.data = r.responseBody.setResponseDTOS;

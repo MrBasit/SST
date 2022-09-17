@@ -94,7 +94,7 @@ export class UserService {
     return this.http.delete(url, options);
   }
 
-  GetSets(url: string, body: {}) {
+  getData(url: string, body: {}) {
     this.Autorization = this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(
       {
