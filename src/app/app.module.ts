@@ -53,6 +53,8 @@ import { EditStakeholderComponent } from './edit-stakeholder/edit-stakeholder.co
 import { EditObjectiveComponent } from './edit-objective/edit-objective.component';
 import { CreateObjectiveComponent } from './create-objective/create-objective.component';
 import { AssignObjectivesComponent } from './assign-objectives/assign-objectives.component';
+import { AssignPriorityComponent } from './assign-priority/assign-priority.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { AssignObjectivesComponent } from './assign-objectives/assign-objectives
     EditObjectiveComponent,
     CreateObjectiveComponent,
     AssignObjectivesComponent,
+    AssignPriorityComponent,
   ],
   imports: [
     HttpClientModule,
@@ -110,6 +113,7 @@ import { AssignObjectivesComponent } from './assign-objectives/assign-objectives
     MatCheckboxModule,
     MatCardModule,
     MatDividerModule,
+    MatSelectModule,
     RouterModule.forRoot([
       { path: '', component: InitialFormComponent },
       { path: 'signin', component: SigninFormComponent },
@@ -131,7 +135,8 @@ import { AssignObjectivesComponent } from './assign-objectives/assign-objectives
       { path: 'editStakeholder',  component:EditStakeholderComponent},
       { path: 'editObjective', component:EditObjectiveComponent},
       { path: 'createObjective', component:CreateObjectiveComponent},
-      { path: 'assignObjective', component:AssignObjectivesComponent}
+      { path: 'assignObjective', component:AssignObjectivesComponent},
+      {path:'assignPriority',component:AssignPriorityComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],

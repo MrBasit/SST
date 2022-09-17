@@ -47,7 +47,7 @@ export class ObjectivesCrudFormComponent implements OnInit {
     this.userService.getData(url, body).subscribe(
       (r: any) => {
 
-        this.data = r.responseBody.stakeholderResponseDTOS;
+        this.data = r.responseBody.objectiveResponseDTOS;
         this.resultsLength = r.length;
         console.log(this.data);
         this.isLoading = false;

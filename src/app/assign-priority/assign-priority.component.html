@@ -1,0 +1,63 @@
+<div *ngIf="isLoading" class="loader">
+    <mat-spinner></mat-spinner>
+</div>
+<div id="Header" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
+    <div style="width: 33%; display: flex;flex-direction: row; align-items: center;justify-content: flex-start;">
+
+        <button routerLink="/assignObjective" mat-icon-button aria-label="Example icon button with a home icon">
+            <mat-icon style="font-size: 22px;">keyboard_arrow_left</mat-icon>
+        </button>
+        <h3>StackHolder Specification Tool</h3>
+    </div>
+    <h2 style="text-align: center;width: 33%;">Add Stakeholder</h2>
+</div>
+<div id="body" style="text-align: center;">
+    <div>
+        <mat-error [hidden]="!Error" style="font-size: 13px;align-items: center;">
+            <span>{{Error}}</span>
+            <br>
+        </mat-error>
+        <mat-error [hidden]="!Error2" style="font-size: 13px;align-items: center;">
+            <span>{{Error2?.error?.error}}</span>
+        </mat-error>
+        <br>
+    </div>
+    <form class="form" (ngSubmit)="onSubmit()">
+
+
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Select Objective</mat-label>
+            <mat-select [formControl]="setName" required>
+              <mat-option>Select Objective</mat-option>
+              <mat-option *ngFor="let objective of objectiveList" [value]="objective">
+                {{objective.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="setName.hasError('required')">Please choose an objective</mat-error>
+            <mat-hint>{{setName.value?.sound}}</mat-hint>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="control" appearance="fill">
+            <mat-label>Select Priority</mat-label>
+            <mat-select [formControl]="Description" required>
+              <mat-option>Select Priority</mat-option>
+              <mat-option *ngFor="let priority of priorityList" [value]="priority">
+                {{priority}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="Description.hasError('required')">Please choose an Priority</mat-error>
+            <mat-hint>{{Description.value?.sound}}</mat-hint>
+        </mat-form-field>
+
+        <br>
+
+        <div style="display: flex;flex-direction: row; justify-content: space-between;">
+            <button routerLink="/assignObjective" mat-button>Cancel</button>
+            <button class="submit-button" mat-raised-button type="submit" color="primary">Assign Priority</button>
+
+        </div>
+
+    </form>
+</div>
