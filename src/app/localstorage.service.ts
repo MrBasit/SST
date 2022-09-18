@@ -26,6 +26,20 @@ export class LocalstorageService {
     }
   }
 
+  public get GetAssignPriority(){
+    let a = localStorage.getItem('AssignPriority') as string;
+    return JSON.parse(a) as UserSet;
+  }
+  
+  public set SetAssignPriority(value:any){
+   if(value==null){
+     localStorage.removeItem('AssignPriority');
+   }
+   else{
+     localStorage.setItem('AssignPriority',JSON.stringify(value))        
+   }
+  }
+
 
   public get GetUserStakeholder(){
      let a = localStorage.getItem('UserStakeholder') as string;
@@ -72,6 +86,8 @@ export class LocalstorageService {
    }
  }
 
+
+
   
 }
 export interface User{
@@ -113,4 +129,9 @@ export interface UserObjective{
   "description":string
 }
 
+export interface AssignPriority{
+  "id":string,
+  "name":string,
+  "priority":string
+}
 

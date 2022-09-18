@@ -9,6 +9,7 @@ import { LocalstorageService, UserStakeholder } from '../localstorage.service';
 import { UserService } from '../user.service';
 import { StakeholderViewPopUpComponent } from './../stakeholder-view-pop-up/stakeholder-view-pop-up.component';
 import { StakeholderDeletePopUpComponent } from './../stakeholder-delete-pop-up/stakeholder-delete-pop-up.component';
+import { AssignPriorityViewPopUpComponent } from './../assign-priority-view-pop-up/assign-priority-view-pop-up.component';
 
 @Component({
   selector: 'app-assign-objectives',
@@ -59,11 +60,11 @@ export class AssignObjectivesComponent implements OnInit {
 
   viewData(data: any) {
 
-    console.log(data.row);
-    this.storageService.SetUserStakeholder = data;
     
+    this.storageService.SetAssignPriority = data.row;
+    console.log(this.storageService.GetAssignPriority);
 
-    let ViewDialogRef = this.dialog.open(StakeholderViewPopUpComponent, {
+    let ViewDialogRef = this.dialog.open(AssignPriorityViewPopUpComponent, {
       data: data
     })
     ViewDialogRef.afterOpened().subscribe(r => {
@@ -84,10 +85,10 @@ export class AssignObjectivesComponent implements OnInit {
     DeleteDialogRef.afterClosed().subscribe(r => {
       if (r) {
         this.isLoading = true;
-        let url = GlobalComponent.apiUrl + 'stakeholder/deleteStakeholder';
+        let url = GlobalComponent.apiUrl + 'priority/deletePriority';
         console.log('id: ', data.row.id);
         let body = {
-          stakeholderId: data.row.id
+          id: data.row.id
         }
         this.userService.DeleteAccount(url, body).subscribe(
           (r: any) => {
@@ -111,15 +112,15 @@ export class AssignObjectivesComponent implements OnInit {
   }
 
   onEdit(data: any) {
-    let stakeholderData = {
-      setId: this.storageService.GetUserSet.id,
-      id: data.row.id,
-      name: data.row.name,
-      description: data.row.description
-    };
-    console.log(stakeholderData);
-    this.storageService.SetUserStakeholder = stakeholderData;
-    this.router.navigate(['/editStakeholder']);
+    let priority={
+      id:data.row.id,
+      name:data.row.objectiveName,
+      priority:data.row.priority
+    }
+    this.storageService.SetAssignPriority=priority;
+    // console.log(priority);
+    // console.log(this.storageService.GetUserStakeholder);
+    this.router.navigate(['/updatePriority']);
 
   }
 

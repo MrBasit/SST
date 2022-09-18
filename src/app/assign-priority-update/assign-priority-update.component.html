@@ -26,7 +26,7 @@
 
 
         <mat-form-field class="control" appearance="fill">
-            <mat-label>Select Objective</mat-label>
+            <mat-label>{{objective}}</mat-label>
             <mat-select [formControl]="setName" required>
               <mat-option>Select Objective</mat-option>
               <mat-option *ngFor="let objective of objectiveList" [value]="objective">
@@ -40,7 +40,7 @@
         <br>
 
         <mat-form-field class="control" appearance="fill">
-            <mat-label>Select Priority</mat-label>
+            <mat-label>Update Priority</mat-label>
             <mat-select [formControl]="Description" required>
               <mat-option>Select Priority</mat-option>
               <mat-option *ngFor="let priority of priorityList" [value]="priority">
@@ -55,7 +55,7 @@
 
         <div style="display: flex;flex-direction: row; justify-content: space-between;">
             <button routerLink="/assignObjective" mat-button>Cancel</button>
-            <button class="submit-button" mat-raised-button type="submit" color="primary">Assign Priority</button>
+            <button class="submit-button" mat-raised-button type="submit" color="primary">Update Priority</button>
 
         </div>
 

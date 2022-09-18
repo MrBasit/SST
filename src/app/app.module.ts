@@ -55,6 +55,8 @@ import { CreateObjectiveComponent } from './create-objective/create-objective.co
 import { AssignObjectivesComponent } from './assign-objectives/assign-objectives.component';
 import { AssignPriorityComponent } from './assign-priority/assign-priority.component';
 import {MatSelectModule} from '@angular/material/select';
+import { AssignPriorityUpdateComponent } from './assign-priority-update/assign-priority-update.component';
+import { AssignPriorityViewPopUpComponent } from './assign-priority-view-pop-up/assign-priority-view-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import {MatSelectModule} from '@angular/material/select';
     CreateObjectiveComponent,
     AssignObjectivesComponent,
     AssignPriorityComponent,
+    AssignPriorityUpdateComponent,
+    AssignPriorityViewPopUpComponent,
   ],
   imports: [
     HttpClientModule,
@@ -136,7 +140,8 @@ import {MatSelectModule} from '@angular/material/select';
       { path: 'editObjective', component:EditObjectiveComponent},
       { path: 'createObjective', component:CreateObjectiveComponent},
       { path: 'assignObjective', component:AssignObjectivesComponent},
-      {path:'assignPriority',component:AssignPriorityComponent}
+      { path: 'assignPriority',component:AssignPriorityComponent},
+      { path: 'updatePriority', component:AssignPriorityUpdateComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
