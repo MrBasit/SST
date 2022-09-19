@@ -57,6 +57,7 @@ import { AssignPriorityComponent } from './assign-priority/assign-priority.compo
 import {MatSelectModule} from '@angular/material/select';
 import { AssignPriorityUpdateComponent } from './assign-priority-update/assign-priority-update.component';
 import { AssignPriorityViewPopUpComponent } from './assign-priority-view-pop-up/assign-priority-view-pop-up.component';
+import { AssignPriorityDeletePopUpComponent } from './assign-priority-delete-pop-up/assign-priority-delete-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { AssignPriorityViewPopUpComponent } from './assign-priority-view-pop-up/
     AssignPriorityComponent,
     AssignPriorityUpdateComponent,
     AssignPriorityViewPopUpComponent,
+    AssignPriorityDeletePopUpComponent,
   ],
   imports: [
     HttpClientModule,

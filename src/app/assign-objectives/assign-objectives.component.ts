@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
 import { StakeholderViewPopUpComponent } from './../stakeholder-view-pop-up/stakeholder-view-pop-up.component';
 import { StakeholderDeletePopUpComponent } from './../stakeholder-delete-pop-up/stakeholder-delete-pop-up.component';
 import { AssignPriorityViewPopUpComponent } from './../assign-priority-view-pop-up/assign-priority-view-pop-up.component';
+import { AssignPriorityDeletePopUpComponent } from './../assign-priority-delete-pop-up/assign-priority-delete-pop-up.component';
 
 @Component({
   selector: 'app-assign-objectives',
@@ -79,7 +80,7 @@ export class AssignObjectivesComponent implements OnInit {
 
     console.log(data);
 
-    let DeleteDialogRef = this.dialog.open(StakeholderDeletePopUpComponent, {
+    let DeleteDialogRef = this.dialog.open(AssignPriorityDeletePopUpComponent, {
       data: null
     })
     DeleteDialogRef.afterClosed().subscribe(r => {
