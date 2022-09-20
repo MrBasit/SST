@@ -58,6 +58,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { AssignPriorityUpdateComponent } from './assign-priority-update/assign-priority-update.component';
 import { AssignPriorityViewPopUpComponent } from './assign-priority-view-pop-up/assign-priority-view-pop-up.component';
 import { AssignPriorityDeletePopUpComponent } from './assign-priority-delete-pop-up/assign-priority-delete-pop-up.component';
+import { AdminEditSetComponent } from './admin-edit-set/admin-edit-set.component';
+import { AdminEditObjectiveComponent } from './admin-edit-objective/admin-edit-objective.component';
+import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-edit-stakeholder.component';
 
 @NgModule({
   declarations: [
@@ -96,9 +99,11 @@ import { AssignPriorityDeletePopUpComponent } from './assign-priority-delete-pop
     AssignPriorityUpdateComponent,
     AssignPriorityViewPopUpComponent,
     AssignPriorityDeletePopUpComponent,
+    AdminEditSetComponent,
+    AdminEditObjectiveComponent,
   ],
   imports: [
-    HttpClientModule,
+  HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
@@ -143,7 +148,10 @@ import { AssignPriorityDeletePopUpComponent } from './assign-priority-delete-pop
       { path: 'createObjective', component:CreateObjectiveComponent},
       { path: 'assignObjective', component:AssignObjectivesComponent},
       { path: 'assignPriority',component:AssignPriorityComponent},
-      { path: 'updatePriority', component:AssignPriorityUpdateComponent}
+      { path: 'updatePriority', component:AssignPriorityUpdateComponent},
+      { path: 'adminEditSet', component:AdminEditSetComponent},
+      { path: 'adminEditObjective', component: AdminEditObjectiveComponent},
+      { path: 'adminEditStakeholder', component:AdminEditStakeholderComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],

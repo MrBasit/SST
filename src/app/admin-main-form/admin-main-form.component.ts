@@ -24,8 +24,9 @@ export class AdminMainFormComponent implements OnInit {
   displayedColumns: string[] = ['username','firstName', 'lastName', 'email','isActive','Edit','View','Delete'];
   menuItems:any[]=[
                     {link:'/edituser',name:'Users'},
-                    {link:'/editobjective',name:'Objectives'},
-                    {link:'/editset',name:'Sets'}
+                    {link:'/adminEditObjective',name:'Objectives'},
+                    {link:'/adminEditSet',name:'Sets'},
+                    {link:'/adminEditStakeholder', name:'Stakeholders'}
                   ]
   resultsLength = 0;
   isLoading:boolean=false;

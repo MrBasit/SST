@@ -50,6 +50,19 @@ export class UserService {
   Awake(url: string) {
     return this.http.get(url);
   }
+
+  getAdminData(url: string) {
+    this.Autorization = this.storageService.GetCurrentuesr.accessToken;
+    let header = new HttpHeaders(
+      { 'Authorization': 'Bearer ' + this.Autorization }
+    );
+    let options = {
+      headers: header
+    }
+    return this.http.get(url,options);
+  }
+  
+
   ChangePassword(url: string, body: {}) {
     this.Autorization = this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(

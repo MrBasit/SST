@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalstorageService {
+  AdminAddType: any;
 
   constructor() { 
   }
@@ -86,6 +87,19 @@ export class LocalstorageService {
    }
  }
 
+ public get GetAdminAddType(){
+  let a = localStorage.getItem('AdminAddType') as string;
+  return JSON.parse(a) as UserSet;
+}
+
+public set SetAdminAddType(value:any){
+ if(value==null){
+   localStorage.removeItem('AdminAddType');
+ }
+ else{
+   localStorage.setItem('AdminAddType',JSON.stringify(value))        
+ }
+}
 
 
   
@@ -135,3 +149,6 @@ export interface AssignPriority{
   "priority":string
 }
 
+export interface AdminAddType{
+  "addType":string
+}
