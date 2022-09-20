@@ -26,7 +26,7 @@ export class MainFormComponent implements OnInit {
     this.isLoading = true;
     let url = GlobalComponent.apiUrl + 'user/logout';
     this.userService.SignOut(url);
-    this.storageService.SetCurrentUser = null;
+    localStorage.clear();
     this.router.navigate(['/'])
 
   }

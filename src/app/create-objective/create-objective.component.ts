@@ -65,12 +65,9 @@ export class CreateObjectiveComponent implements OnInit {
       this.isLoading = true;
       console.log(this.addSetForm.value);
       let url = GlobalComponent.apiUrl + "objective/addObjective";
-
-      this.trimmedName = this.addSetForm.value['setName'];
-      this.trimmedName = this.trimmedName.trim();
       let body = {
         setId: this.storageService.GetUserSet.id,
-        name: this.trimmedName,
+        name: this.addSetForm.value['setName'].name,
         description: this.addSetForm.value['Description'],
       }
 
