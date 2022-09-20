@@ -1,0 +1,40 @@
+.main {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainTop {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 20px 20px 30px 20px;
+}
+
+.mainTopButtons {
+    display: flex;
+    flex-direction: row;
+    width: 23%;
+    justify-content: space-between;
+    justify-items: flex-start;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    overflow: hidden;
+    width: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}

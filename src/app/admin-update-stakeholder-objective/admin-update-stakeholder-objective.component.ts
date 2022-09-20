@@ -7,25 +7,23 @@ import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-create-stakeholder',
-  templateUrl: './create-stakeholder.component.html',
-  styleUrls: ['./create-stakeholder.component.css']
+  selector: 'app-admin-update-stakeholder-objective',
+  templateUrl: './admin-update-stakeholder-objective.component.html',
+  styleUrls: ['./admin-update-stakeholder-objective.component.css']
 })
-export class CreateStakeholderComponent implements OnInit {
+export class AdminUpdateStakeholderObjectiveComponent implements OnInit {
 
   isLoading: boolean = false;
-
-  isSignupSuccessfull = false;
+  UserSet: any = {};
   Error: any = null;
   Error2: any = null;
-  regex: any = null;
-  CurrentUser: any = {};
   trimmedName: string = "";
-  stakeholderList: any = [];
+  updateType: string = "";
+
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
-    this.CurrentUser = this.storageService.GetCurrentuesr;
+    this.UserSet = this.storageService.GetUserSet;
   }
 
   addSetForm = new FormGroup({
@@ -40,11 +38,20 @@ export class CreateStakeholderComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
 
-    console.log(this.storageService.GetUserSet);
+    console.log(this.storageService.GetAdminUpdateType)
+    this.setName.setValue(this.storageService.GetAdminUpdateType.name);
+    this.Description.setValue(this.storageService.GetAdminUpdateType.description);
+    this.updateType = this.storageService.GetAdminUpdateType.updateType;
+  }
 
+  goToStakeholderObjective() {
+    if (this.updateType == 'Objective') {
+      this.router.navigate(['/adminEditObjective'])
+    } else {
+      this.router.navigate(['/adminEditStakeholder'])
+    }
   }
 
   onSubmit() {
@@ -52,17 +59,17 @@ export class CreateStakeholderComponent implements OnInit {
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-      let url = GlobalComponent.apiUrl + "stakeholder/addStakeholder";
+      let url = GlobalComponent.apiUrl + "admin/updateStakeholderObjective";
       this.trimmedName = this.addSetForm.value['setName'];
       this.trimmedName = this.trimmedName.trim();
       let body = {
-        setId: this.storageService.GetUserSet.id,
+        updateType: this.updateType,
+        id: this.storageService.GetAdminUpdateType.id,
         name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
-
       console.log('body -> ', body);
-      this.userService.CreateSet(url, body).subscribe(
+      this.userService.UpdateSet(url, body).subscribe(
         (r: any) => {
           this.isLoading = false;
           if (r.responseCode != 1) {
@@ -75,14 +82,15 @@ export class CreateStakeholderComponent implements OnInit {
           else {
             this.Error = null;
             console.log(r);
-            this.isSignupSuccessfull = true;
-            this.router.navigate(['/stakeholdersUser'])
+            if (this.updateType == 'Objective') this.router.navigate(['/adminEditObjective'])
+            else this.router.navigate(['/adminEditStakeholder'])
           }
         },
         (e: any) => {
           this.isLoading = false;
-          console.log('error => ', e)
+
           this.Error = e.error.responseMessage;
+          console.log('error => ', this.Error)
         }
       )
 

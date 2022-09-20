@@ -18,7 +18,8 @@
 
 
         <div class="mainTopButtons">
-            <button routerLink="/#" mat-raised-button color="primary" (click)="goToStakeholderObjective()">Create New Objective</button>
+            <button routerLink="/adminAddStakeholderObjective" mat-raised-button color="primary"
+                (click)="goToStakeholderObjective()">Create New Objective</button>
             <button mat-raised-button color="primary" (click)="changeView()" *ngIf="!isView">View Mode</button>
             <button mat-raised-button color="primary" (click)="changeView()" *ngIf="isView">Edit Mode</button>
         </div>

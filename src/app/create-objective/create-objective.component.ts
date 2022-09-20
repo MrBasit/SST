@@ -20,7 +20,8 @@ export class CreateObjectiveComponent implements OnInit {
   Error2: any = null;
   regex: any = null;
   CurrentUser: any = {};
-  trimmedName:string="";
+  trimmedName: string = "";
+  objectiveList: any = [];
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
@@ -42,7 +43,19 @@ export class CreateObjectiveComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.storageService.GetUserSet);
+    this.isLoading = true;
+    let url = GlobalComponent.apiUrl + "admin/getObjectivesStakeholders";
+
+    this.userService.getAdminData(url).subscribe(
+      (r: any) => {
+
+        this.objectiveList = r.getObjectivesResponseDTO.objectiveResponseDTOS;
+        console.log(this.objectiveList);
+        this.isLoading = false;
+
+
+      }
+    )
 
   }
 
@@ -52,15 +65,15 @@ export class CreateObjectiveComponent implements OnInit {
       this.isLoading = true;
       console.log(this.addSetForm.value);
       let url = GlobalComponent.apiUrl + "objective/addObjective";
-      
-      this.trimmedName=this.addSetForm.value['setName'];
-      this.trimmedName=this.trimmedName.trim();
+
+      this.trimmedName = this.addSetForm.value['setName'];
+      this.trimmedName = this.trimmedName.trim();
       let body = {
         setId: this.storageService.GetUserSet.id,
         name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
-      
+
 
       console.log('body -> ', body);
       this.userService.CreateSet(url, body).subscribe(

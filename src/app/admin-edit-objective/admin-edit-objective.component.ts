@@ -38,7 +38,7 @@ export class AdminEditObjectiveComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     let url = GlobalComponent.apiUrl + "admin/getObjectivesStakeholders";
-    
+
     this.userService.getAdminData(url).subscribe(
       (r: any) => {
 
@@ -58,7 +58,7 @@ export class AdminEditObjectiveComponent implements OnInit {
 
     console.log(data.row);
     this.storageService.SetUserObjective = data;
-    
+
 
     let ViewDialogRef = this.dialog.open(ObjectiveViewPopUpComponent, {
       data: data
@@ -84,7 +84,7 @@ export class AdminEditObjectiveComponent implements OnInit {
         let url = GlobalComponent.apiUrl + 'admin/deleteStakeholderObjective';
         console.log('id: ', data.row.id);
         let body = {
-          deleteType:"Objective",
+          deleteType: "Objective",
           id: data.row.id
         }
         this.userService.DeleteAccount(url, body).subscribe(
@@ -101,27 +101,28 @@ export class AdminEditObjectiveComponent implements OnInit {
 
   }
 
-  goToStakeholderObjective(){
+  goToStakeholderObjective() {
 
-    let addType={
-      addType:"Objective"
+    let addType = {
+      addType: "Objective"
     }
 
-    this.storageService.SetAdminAddType=addType;
+    this.storageService.SetAdminAddType = addType;
     console.log(this.storageService.GetAdminAddType);
+    this.router.navigate(['/adminAddStakeholderObjective']);
   }
 
   onEdit(data: any) {
 
     let setData = {
-      setId: this.storageService.GetUserSet.id,
+      updateType: 'Objective',
       id: data.row.id,
       name: data.row.name,
       description: data.row.description
     };
     console.log(setData);
-    this.storageService.SetUserObjective = setData;
-    this.router.navigate(['/editObjective']);
+    this.storageService.SetAdminUpdateType = setData;
+    this.router.navigate(['/adminUpdateStakeholderObjective']);
 
   }
 

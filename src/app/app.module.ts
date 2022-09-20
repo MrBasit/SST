@@ -54,12 +54,14 @@ import { EditObjectiveComponent } from './edit-objective/edit-objective.componen
 import { CreateObjectiveComponent } from './create-objective/create-objective.component';
 import { AssignObjectivesComponent } from './assign-objectives/assign-objectives.component';
 import { AssignPriorityComponent } from './assign-priority/assign-priority.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { AssignPriorityUpdateComponent } from './assign-priority-update/assign-priority-update.component';
 import { AssignPriorityViewPopUpComponent } from './assign-priority-view-pop-up/assign-priority-view-pop-up.component';
 import { AssignPriorityDeletePopUpComponent } from './assign-priority-delete-pop-up/assign-priority-delete-pop-up.component';
 import { AdminEditSetComponent } from './admin-edit-set/admin-edit-set.component';
 import { AdminEditObjectiveComponent } from './admin-edit-objective/admin-edit-objective.component';
+import { AdminAddStakeholderObjectiveComponent } from './admin-add-stakeholder-objective/admin-add-stakeholder-objective.component';
+import { AdminUpdateStakeholderObjectiveComponent } from './admin-update-stakeholder-objective/admin-update-stakeholder-objective.component';
 import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-edit-stakeholder.component';
 
 @NgModule({
@@ -101,9 +103,12 @@ import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-ed
     AssignPriorityDeletePopUpComponent,
     AdminEditSetComponent,
     AdminEditObjectiveComponent,
+    AdminAddStakeholderObjectiveComponent,
+    AdminUpdateStakeholderObjectiveComponent,
+    AdminEditStakeholderComponent,
   ],
   imports: [
-  HttpClientModule,
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
@@ -142,16 +147,18 @@ import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-ed
       { path: 'editSet', component: EditSetComponent },
       { path: 'stakeholdersUser', component: StakeholdersCrudFormComponent },
       { path: 'createStakeholder', component: CreateStakeholderComponent },
-      { path: 'objectivesUser', component:ObjectivesCrudFormComponent},
-      { path: 'editStakeholder',  component:EditStakeholderComponent},
-      { path: 'editObjective', component:EditObjectiveComponent},
-      { path: 'createObjective', component:CreateObjectiveComponent},
-      { path: 'assignObjective', component:AssignObjectivesComponent},
-      { path: 'assignPriority',component:AssignPriorityComponent},
-      { path: 'updatePriority', component:AssignPriorityUpdateComponent},
-      { path: 'adminEditSet', component:AdminEditSetComponent},
-      { path: 'adminEditObjective', component: AdminEditObjectiveComponent},
-      { path: 'adminEditStakeholder', component:AdminEditStakeholderComponent}
+      { path: 'objectivesUser', component: ObjectivesCrudFormComponent },
+      { path: 'editStakeholder', component: EditStakeholderComponent },
+      { path: 'editObjective', component: EditObjectiveComponent },
+      { path: 'createObjective', component: CreateObjectiveComponent },
+      { path: 'assignObjective', component: AssignObjectivesComponent },
+      { path: 'assignPriority', component: AssignPriorityComponent },
+      { path: 'updatePriority', component: AssignPriorityUpdateComponent },
+      { path: 'adminEditSet', component: AdminEditSetComponent },
+      { path: 'adminEditObjective', component: AdminEditObjectiveComponent },
+      { path: 'adminAddStakeholderObjective', component: AdminAddStakeholderObjectiveComponent },
+      { path: 'adminUpdateStakeholderObjective', component: AdminUpdateStakeholderObjectiveComponent },
+      { path: 'adminEditStakeholder', component: AdminEditStakeholderComponent }
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
