@@ -43,7 +43,18 @@ export class CreateStakeholderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.storageService.GetUserSet);
+    this.isLoading = true;
+    let url = GlobalComponent.apiUrl + "admin/getObjectivesStakeholders";
+
+    this.userService.getAdminData(url).subscribe(
+      (r: any) => {
+
+        this.stakeholderList = r.getStakeholderResponseDTO.stakeholderResponseDTOS;
+        console.log(this.stakeholderList);
+        this.isLoading = false;
+
+      }
+    )
 
   }
 

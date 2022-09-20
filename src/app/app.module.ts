@@ -63,6 +63,7 @@ import { AdminEditObjectiveComponent } from './admin-edit-objective/admin-edit-o
 import { AdminAddStakeholderObjectiveComponent } from './admin-add-stakeholder-objective/admin-add-stakeholder-objective.component';
 import { AdminUpdateStakeholderObjectiveComponent } from './admin-update-stakeholder-objective/admin-update-stakeholder-objective.component';
 import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-edit-stakeholder.component';
+import { AdminAddSetComponent } from './admin-add-set/admin-add-set.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-ed
     AdminAddStakeholderObjectiveComponent,
     AdminUpdateStakeholderObjectiveComponent,
     AdminEditStakeholderComponent,
+    AdminAddSetComponent,
   ],
   imports: [
     HttpClientModule,
@@ -158,7 +160,8 @@ import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-ed
       { path: 'adminEditObjective', component: AdminEditObjectiveComponent },
       { path: 'adminAddStakeholderObjective', component: AdminAddStakeholderObjectiveComponent },
       { path: 'adminUpdateStakeholderObjective', component: AdminUpdateStakeholderObjectiveComponent },
-      { path: 'adminEditStakeholder', component: AdminEditStakeholderComponent }
+      { path: 'adminEditStakeholder', component: AdminEditStakeholderComponent },
+      { path: 'adminAddSet', component: AdminAddSetComponent}
     ])
   ],
   providers: [UserService, HttpClient, LocalstorageService, { provide: LocationStrategy, useClass: HashLocationStrategy }],

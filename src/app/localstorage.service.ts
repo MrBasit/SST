@@ -116,7 +116,19 @@ export class LocalstorageService {
     }
   }
 
+  public get GetUserType() {
+    let a = localStorage.getItem('UserType') as string;
+    return JSON.parse(a) as UserType;
+  }
 
+  public set SetUserType(value: any) {
+    if (value == null) {
+      localStorage.removeItem('UserType');
+    }
+    else {
+      localStorage.setItem('UserType', JSON.stringify(value))
+    }
+  }
 
 }
 export interface User {
@@ -173,4 +185,8 @@ export interface AdminUpdateType {
   "id": string,
   "name": string,
   "description": string
+}
+
+export interface UserType{
+  "userType":string
 }
