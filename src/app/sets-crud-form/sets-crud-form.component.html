@@ -13,6 +13,7 @@
 </div>
 <br>
 <div class="main">
+  
 
   <div class="mainTop">
 
@@ -72,6 +73,17 @@
             <button routerLink="/objectivesUser" class="submit-button" mat-button type="submit" color="primary" (click)="goToObjective({row})">Manage Objectives</button>
           </td>
         </ng-container>
+
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="Verify">
+          <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: center !important;">Verify Set
+          </th>
+          <td mat-cell *matCellDef="let row" style="width: 15%;text-align: center !important;">
+            <button class="submit-button" mat-button type="submit" color="primary" (click)="verify({row})">Verify</button>
+          </td>
+        </ng-container>
+
 
 
         <!-- Edit Column -->

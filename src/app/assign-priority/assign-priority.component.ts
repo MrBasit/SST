@@ -22,8 +22,11 @@ export class AssignPriorityComponent implements OnInit {
   CurrentUser: any = {};
   objectiveId:any="";
   objectiveList:any=[];
+  stakeholderList:any=[];
+  setList:any=[];
   objective:string="";
   priorityList:string[]=["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+  isAdmin:boolean=false;
 
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
@@ -34,6 +37,8 @@ export class AssignPriorityComponent implements OnInit {
   addSetForm = new FormGroup({
     setName: new FormControl('', [Validators.required]),
     Description: new FormControl('', [Validators.required]),
+    stakeholder:new FormControl('',[]),
+    sets: new FormControl('',[])
   })
   public get setName() {
     return this.addSetForm.get('setName') as FormControl;
@@ -41,14 +46,46 @@ export class AssignPriorityComponent implements OnInit {
   public get Description() {
     return this.addSetForm.get('Description') as FormControl;
   }
+  public get stakeholder(){
+    return this.addSetForm.get('stakeholder') as FormControl;
+  }
+  public get sets(){
+    return this.addSetForm.get('sets') as FormControl;
+  }
 
 
 
   ngOnInit(): void {
-
-    console.log(this.storageService.GetUserSet);
-    
     this.isLoading = true;
+    if (this.storageService.GetUserType.userType=='Admin') {
+      let url = GlobalComponent.apiUrl + "admin/getSets";
+      this.userService.Awake(url).subscribe(
+      (r: any) => {
+        console.log(r);
+        this.setList = r.responseBody.setResponseDTOS;
+        console.log(this.setList);
+        
+      }
+    )
+    }
+
+    if (this.storageService.GetUserType.userType=='Admin') {
+      
+      this.isAdmin=true;
+      let url = GlobalComponent.apiUrl + "admin/getSetObjectivesStakeholders";
+      this.userService.Awake(url).subscribe(
+      (r: any) => {
+        console.log(r);
+        this.objectiveList = r.getObjectivesResponseDTO.objectiveResponseDTOS;
+        this.stakeholderList= r.getStakeholderResponseDTO.stakeholderResponseDTOS;
+        console.log(this.objectiveList);
+        this.isLoading=false;
+      }
+    )
+    }else{
+    
+    this.isAdmin=false;
+    console.log(this.storageService.GetUserSet);
     let url = GlobalComponent.apiUrl + "objective/getObjectives";
     let body = {
       setId: this.storageService.GetUserSet.id
@@ -56,13 +93,15 @@ export class AssignPriorityComponent implements OnInit {
     console.log(body);
     this.userService.getData(url, body).subscribe(
       (r: any) => {
-
+        this.isAdmin=false;
         this.objectiveList = r.responseBody.objectiveResponseDTOS;
         console.log(this.objectiveList);
         this.isLoading=false;
       }
     )
-
+    }
+    
+    console.log(this.isAdmin);
   }
 
   getObjectiveIdByName(objectiveName:any){
@@ -83,11 +122,21 @@ export class AssignPriorityComponent implements OnInit {
       let url = GlobalComponent.apiUrl + "priority/addPriority";
       this.objective=this.addSetForm.value['setName'];
       this.objectiveId=this.getObjectiveIdByName(this.objective);
-      let body = {
-        setId: this.storageService.GetUserSet.id,
-        stakeholderId:this.storageService.GetUserStakeholder.id,
-        objectiveId:this.objectiveId,
-        priority: this.addSetForm.value['Description'],
+      let body={};
+      if (this.isAdmin) {
+        body = {
+          setId: this.addSetForm.value['sets'].id,
+          stakeholderId:this.addSetForm.value['stakeholder'].id,
+          objectiveId:this.addSetForm.value['setName'].id,
+          priority: this.addSetForm.value['Description'],
+        }
+      }else{
+        body = {
+          setId: this.storageService.GetUserSet.id,
+          stakeholderId:this.storageService.GetUserStakeholder.id,
+          objectiveId:this.objectiveId,
+          priority: this.addSetForm.value['Description'],
+        }
       }
 
       console.log('body -> ', body);

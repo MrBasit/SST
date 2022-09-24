@@ -86,7 +86,12 @@ export class UpdateAccountFormComponent implements OnInit {
             this.CurrentUser.accessToken=this.storageService.GetCurrentuesr.accessToken;
             this.CurrentUser.refreshToken=this.storageService.GetCurrentuesr.refreshToken;
             this.storageService.SetCurrentUser=this.CurrentUser;
+            if (this.storageService.GetUserType.userType=='admin') {
+              this.router.navigate(['/adminmain'])
+            }
+            else{
             this.router.navigate(['/main']);
+            }
           }
           else{
             this.Error={
@@ -109,6 +114,14 @@ export class UpdateAccountFormComponent implements OnInit {
     
       this.isLoading=false;
     }
+    }
+
+    goToMain(){
+      if (this.storageService.GetUserType.userType=='admin') {
+        this.router.navigate(['/adminmain'])
+      }else{
+        this.router.navigate(['/main'])
+      }
     }
 }
 

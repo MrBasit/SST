@@ -4,7 +4,7 @@
 <div id="Header" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
     <div style="width: 33%; display: flex;flex-direction: row; align-items: center;justify-content: flex-start;">
 
-        <button routerLink="/stakeholdersUser" mat-icon-button aria-label="Example icon button with a home icon">
+        <button (click)="goBack()" mat-icon-button aria-label="Example icon button with a home icon">
             <mat-icon style="font-size: 22px;">keyboard_arrow_left</mat-icon>
         </button>
         <h3>StackHolder Specification Tool</h3>
@@ -40,8 +40,14 @@
 
                 <!-- First Name Column -->
                 <ng-container matColumnDef="objectiveName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 50%;"> Objective Name </th>
-                    <td mat-cell *matCellDef="let row" style="width: 50%;"> {{row.objectiveName}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;"> Objective Name </th>
+                    <td mat-cell *matCellDef="let row" style="width: 30%;"> {{row.objectiveName}} </td>
+                </ng-container>
+
+                <!-- First Name Column -->
+                <ng-container  matColumnDef="stakeholderName">
+                    <th [hidden]="!isAdmin" mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;"> Stakeholder Name </th>
+                    <td [hidden]="!isAdmin" mat-cell *matCellDef="let row" style="width: 30%;"> {{row.stakeholderName}} </td>
                 </ng-container>
 
 

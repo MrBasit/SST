@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/global-component';
 import { LocalstorageService } from '../localstorage.service';
 import { UserService } from '../user.service';
+import { CrudType } from './../localstorage.service';
 
 @Component({
   selector: 'app-admin-add-stakeholder-objective',
@@ -22,6 +23,9 @@ export class AdminAddStakeholderObjectiveComponent implements OnInit {
   CurrentUser: any = {};
   trimmedName: string = "";
   addType: string = "";
+  setList:any=[];
+  isCrudSet:boolean=false;
+  
 
   constructor(public http: HttpClient, public router: Router, public userService: UserService
     , private storageService: LocalstorageService) {
@@ -31,12 +35,16 @@ export class AdminAddStakeholderObjectiveComponent implements OnInit {
   addSetForm = new FormGroup({
     setName: new FormControl('', [Validators.required]),
     Description: new FormControl('', [Validators.required]),
+    Sets:new FormControl('',[Validators.required])
   })
   public get setName() {
     return this.addSetForm.get('setName') as FormControl;
   }
   public get Description() {
     return this.addSetForm.get('Description') as FormControl;
+  }
+  public get Sets(){
+    return this.addSetForm.get('Sets') as FormControl;
   }
 
 
@@ -45,6 +53,24 @@ export class AdminAddStakeholderObjectiveComponent implements OnInit {
 
     console.log(this.storageService.GetAdminAddType);
     this.addType = this.storageService.GetAdminAddType.addType;
+
+    if (this.storageService.GetCrudType.isCrudSet) {
+      this.isCrudSet=true;
+
+      this.isLoading = true;
+      let url = GlobalComponent.apiUrl + "admin/getSets";
+      
+      this.userService.getAdminData(url).subscribe(
+        (r: any) => {
+          this.setList = r.responseBody.setResponseDTOS; 
+          console.log(this.setList);
+          this.isLoading=false;
+        }
+      )
+    }else{
+      this.isCrudSet=false;
+    }
+
 
   }
 
@@ -61,15 +87,26 @@ export class AdminAddStakeholderObjectiveComponent implements OnInit {
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-
-      let url = GlobalComponent.apiUrl + "admin/addStakeholderObjective";
-
       this.trimmedName = this.addSetForm.value['setName'];
       this.trimmedName = this.trimmedName.trim();
-      let body = {
-        addType: this.addType,
-        name: this.trimmedName,
-        description: this.addSetForm.value['Description'],
+
+      let url="";
+      let body={};
+      if(this.storageService.GetCrudType.isCrudSet){
+        url = GlobalComponent.apiUrl + "admin/addSetStakeholderObjective";
+        body = {
+          addType: this.addType,
+          name: this.trimmedName,
+          description: this.addSetForm.value['Description'],
+          setId:this.addSetForm.value['Sets'].id
+        }
+      }else{
+        url = GlobalComponent.apiUrl + "admin/addStakeholderObjective";
+        body = {
+          addType: this.addType,
+          name: this.trimmedName,
+          description: this.addSetForm.value['Description'],
+        }
       }
       console.log('body -> ', body);
       this.userService.CreateSet(url, body).subscribe(

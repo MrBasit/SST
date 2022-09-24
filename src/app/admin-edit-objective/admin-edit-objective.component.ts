@@ -26,18 +26,29 @@ export class AdminEditObjectiveComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'description', 'Edit', 'View', 'Delete'];
+  displayedColumns: string[] = [];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
   pageSize: number = 2;
   isEdit: boolean = false;
   public data: MatTableDataSource<UserObjective>;
+  isCrudSet:boolean=false;
 
 
   ngOnInit(): void {
     this.isLoading = true;
-    let url = GlobalComponent.apiUrl + "admin/getObjectivesStakeholders";
+    let url = "";
+    if(
+      this.storageService.GetCrudType.isCrudSet){url = GlobalComponent.apiUrl + "admin/getSetObjectivesStakeholders";
+      this.displayedColumns=['name', 'description','Set Name','SetId', 'Edit', 'View', 'Delete'];
+      this.isCrudSet=true;
+    }
+    else {
+      url = GlobalComponent.apiUrl + "admin/getObjectivesStakeholders";
+      this.displayedColumns=['name', 'description', 'Edit', 'View', 'Delete'];
+      this.isCrudSet=false;
+    }
 
     this.userService.getAdminData(url).subscribe(
       (r: any) => {
@@ -118,7 +129,8 @@ export class AdminEditObjectiveComponent implements OnInit {
       updateType: 'Objective',
       id: data.row.id,
       name: data.row.name,
-      description: data.row.description
+      description: data.row.description,
+      setId:data.row.setId
     };
     console.log(setData);
     this.storageService.SetAdminUpdateType = setData;

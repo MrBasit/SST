@@ -28,18 +28,44 @@ export class AssignObjectivesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['objectiveName', 'priority', 'Edit', 'View', 'Delete'];
+  displayedColumns: string[] = [];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
   pageSize: number = 2;
   isEdit: boolean = false;
   public data: MatTableDataSource<UserStakeholder>;
+  isAdmin:boolean=false;
 
 
   ngOnInit(): void {
+    
+    this.displayedColumns=['objectiveName','stakeholderName', 'priority', 'Edit', 'View', 'Delete'];
     this.isLoading = true;
-    let url = GlobalComponent.apiUrl + "priority/getPriority";
+    let url="";
+    if(this.storageService.GetUserType.userType=='Admin'){
+      this.isAdmin=true;
+      url = GlobalComponent.apiUrl + "admin/getPriority";
+      this.userService.Awake(url).subscribe(
+        (r: any) => {
+  
+          this.data = r.responseBody;
+          this.resultsLength = r.length;
+          console.log(this.data);
+          this.isLoading = false;
+          this.data = new MatTableDataSource(r.responseBody);
+          this.data.paginator = this.paginator;
+          this.data.sort = this.sort;
+  
+        }
+      )
+
+    }else{
+
+    this.displayedColumns=['objectiveName', 'priority', 'Edit', 'View', 'Delete'];
+
+    this.isAdmin=false;
+    url = GlobalComponent.apiUrl + "priority/getPriority";
     let body = {
       stakeholderId: this.storageService.GetUserStakeholder.id
     };
@@ -57,6 +83,15 @@ export class AssignObjectivesComponent implements OnInit {
 
       }
     )
+  }
+  }
+
+  goBack(){
+    if (this.isAdmin) {
+      this.router.navigate(['/adminmain'])
+    }else{
+      this.router.navigate(['/stakeholdersUser'])
+    }
   }
 
   viewData(data: any) {

@@ -24,6 +24,35 @@
     </div>
     <form class="form" (ngSubmit)="onSubmit()">
 
+        <div *ngIf="isAdmin">
+        <mat-form-field [hidden]="!isAdmin" class="control" appearance="fill">
+            <mat-label>Select Set</mat-label>
+            <mat-select [formControl]="sets" required>
+              <mat-option>Select Set</mat-option>
+              <mat-option *ngFor="let sets of setList" [value]="sets">
+                {{sets.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="sets.hasError('required') && isAdmin">Please choose an objective</mat-error>
+            <mat-hint>{{sets.value?.sound}}</mat-hint>
+        </mat-form-field>
+
+        <br>
+
+
+        <mat-form-field [hidden]="!isAdmin" class="control" appearance="fill">
+            <mat-label>Select Stakeholder</mat-label>
+            <mat-select [formControl]="stakeholder" required>
+              <mat-option>Select Stakeholder</mat-option>
+              <mat-option *ngFor="let stakeholder of stakeholderList" [value]="stakeholder">
+                {{stakeholder.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="stakeholder.hasError('required') && isAdmin">Please choose an objective</mat-error>
+            <mat-hint>{{stakeholder.value?.sound}}</mat-hint>
+        </mat-form-field>
+    </div>
+        <br>
 
         <mat-form-field class="control" appearance="fill">
             <mat-label>Select Objective</mat-label>

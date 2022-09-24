@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -20,15 +21,19 @@ import { UserService } from '../user.service';
 export class SetsCrudFormComponent implements OnInit {
 
 
-  constructor(public router: Router, public dialog: MatDialog, public storageService: LocalstorageService, public userService: UserService) {
+  constructor(public router: Router, public dialog: MatDialog, 
+    private _snackBar: MatSnackBar,
+    public storageService: LocalstorageService, public userService: UserService) {
     this.CurrentUser = this.storageService.GetCurrentuesr;
   }
   CurrentUser: any = {};
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  displayedColumns: string[] = ['name', 'description', 'Stakeholders', 'Objectives', 'Edit', 'View', 'Delete'];
+  displayedColumns: string[] = ['name', 'description', 'Stakeholders', 'Objectives','Verify', 'Edit', 'View', 'Delete'];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
@@ -85,6 +90,39 @@ export class SetsCrudFormComponent implements OnInit {
     console.log(this.storageService.GetUserSet);
   }
 
+  verify(data:any){
+    this.isLoading = true;
+    let url = GlobalComponent.apiUrl + "priority/verify";
+    let body = {
+      setId: data.row.id
+    }
+    this.userService.getData(url, body).subscribe(
+      (r: any) => {
+
+        this.isLoading=false;
+        console.log(r);
+        this.openSnackBar(r.responseBody);
+
+      }
+    )
+  }
+
+  openSnackBar(data:any) {
+    let value="";
+    let css='';
+    if(data.verify){
+      value="Set Verified Successfully";
+      css='green-snackbar';
+    }else{
+      value="Set Verification Failed";
+      css='red-snackbar';
+    }
+    this._snackBar.open(value,'Close', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 5000
+    });
+  }
   onDelete(data: any) {
 
     console.log(data);

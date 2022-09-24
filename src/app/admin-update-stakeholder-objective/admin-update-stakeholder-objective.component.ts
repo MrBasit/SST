@@ -59,15 +59,29 @@ export class AdminUpdateStakeholderObjectiveComponent implements OnInit {
     if (this.addSetForm.valid) {
       this.isLoading = true;
       console.log(this.addSetForm.value);
-      let url = GlobalComponent.apiUrl + "admin/updateStakeholderObjective";
+      let url="";
+      let body={};
       this.trimmedName = this.addSetForm.value['setName'];
       this.trimmedName = this.trimmedName.trim();
-      let body = {
+      if(this.storageService.GetCrudType.isCrudSet){
+        url = GlobalComponent.apiUrl + "admin/updateSetStakeholderObjective";
+        body = {
+          updateType: this.updateType,
+          id: this.storageService.GetAdminUpdateType.id,
+          name: this.trimmedName,
+          description: this.addSetForm.value['Description'],
+          setId:this.storageService.GetAdminUpdateType.setId
+        }
+      }else{
+      url = GlobalComponent.apiUrl + "admin/updateStakeholderObjective";
+      body = {
         updateType: this.updateType,
         id: this.storageService.GetAdminUpdateType.id,
         name: this.trimmedName,
         description: this.addSetForm.value['Description'],
       }
+      }
+      
       console.log('body -> ', body);
       this.userService.UpdateSet(url, body).subscribe(
         (r: any) => {

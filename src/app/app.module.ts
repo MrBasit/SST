@@ -64,6 +64,7 @@ import { AdminAddStakeholderObjectiveComponent } from './admin-add-stakeholder-o
 import { AdminUpdateStakeholderObjectiveComponent } from './admin-update-stakeholder-objective/admin-update-stakeholder-objective.component';
 import { AdminEditStakeholderComponent } from './admin-edit-stakeholder/admin-edit-stakeholder.component';
 import { AdminAddSetComponent } from './admin-add-set/admin-add-set.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { AdminAddSetComponent } from './admin-add-set/admin-add-set.component';
     MatCardModule,
     MatDividerModule,
     MatSelectModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: InitialFormComponent },
       { path: 'signin', component: SigninFormComponent },

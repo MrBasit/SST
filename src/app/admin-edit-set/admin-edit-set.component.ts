@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GlobalComponent } from 'src/global-component';
 import { SetViewComponentPopUpComponent } from './../set-view-component-pop-up/set-view-component-pop-up.component';
 import { DeleteSetPopUpComponent } from './../delete-set-pop-up/delete-set-pop-up.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-edit-set',
@@ -21,15 +22,18 @@ export class AdminEditSetComponent implements OnInit {
   constructor(public router: Router
     , public dialog: MatDialog
     , public storageService: LocalstorageService
-    , public userService: UserService) {
+    , public userService: UserService
+    , private _snackBar: MatSnackBar) {
     this.CurrentUser = this.storageService.GetCurrentuesr;
   }
   CurrentUser: any = {};
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  displayedColumns: string[] = ['name', 'description', 'User Associated With', 'Edit', 'View', 'Delete'];
+  displayedColumns: string[] = ['name', 'description', 'User Associated With','Verify', 'Edit', 'View', 'Delete'];
   resultsLength = 0;
   isLoading: boolean = false;
   isView: Boolean = false;
@@ -71,6 +75,39 @@ export class AdminEditSetComponent implements OnInit {
     })
 
 
+  }
+
+  verify(data:any){
+    this.isLoading = true;
+    let url = GlobalComponent.apiUrl + "priority/verify";
+    let body = {
+      setId: data.row.id
+    }
+    this.userService.getData(url, body).subscribe(
+      (r: any) => {
+
+        this.isLoading=false;
+        console.log(r);
+        this.openSnackBar(r.responseBody);
+
+      }
+    )
+  }
+  openSnackBar(data:any) {
+    let value="";
+    let css='';
+    if(data.verify){
+      value="Set Verified Successfully";
+      css='green-snackbar';
+    }else{
+      value="Set Verification Failed";
+      css='red-snackbar';
+    }
+    this._snackBar.open(value,'Close', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 5000
+    });
   }
 
   

@@ -24,6 +24,18 @@
     </div>
     <form class="form" (ngSubmit)="onSubmit()">
 
+        <mat-form-field [hidden]="!isCrudSet" class="control" appearance="fill">
+            <mat-label>Select Set</mat-label>
+            <mat-select [formControl]="Sets" required>
+                <mat-option>Select Set</mat-option>
+                <mat-option *ngFor="let set of setList" [value]="set">
+                    {{set.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="setName.hasError('required')">Please choose an Set</mat-error>
+            <mat-hint>{{setName.value?.sound}}</mat-hint>
+        </mat-form-field>
+
         <mat-form-field class="control" appearance="fill">
             <mat-label>{{addType}} Name</mat-label>
             <textarea matInput type="text" [formControl]="setName" placeholder="My {{addType}}" maxlength="40" rows="1"

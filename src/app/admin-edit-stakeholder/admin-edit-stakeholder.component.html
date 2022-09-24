@@ -49,8 +49,20 @@
 
                 <!-- Last Name Column -->
                 <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef style="width: 50%;"> Description </th>
-                    <td mat-cell *matCellDef="let row" style="width: 50%;"> {{row.description}} </td>
+                    <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Description </th>
+                    <td mat-cell *matCellDef="let row" style="width: 30%;"> {{row.description}} </td>
+                </ng-container>
+
+                <!-- Last Name Column -->
+                <ng-container matColumnDef="Set Name">
+                    <th [hidden]="!isCrudSet" mat-header-cell *matHeaderCellDef style="width: 20%;"> Set Name </th>
+                    <td [hidden]="!isCrudSet" mat-cell *matCellDef="let row" style="width: 20%;"> {{row.setName}} </td>
+                </ng-container>
+
+                <!-- Last Name Column -->
+                <ng-container matColumnDef="SetId">
+                    <th [hidden]=true mat-header-cell *matHeaderCellDef style="width: 20%;"> Set Name </th>
+                    <td [hidden]=true mat-cell *matCellDef="let row" style="width: 20%;"> {{row.setName}} </td>
                 </ng-container>
 
 

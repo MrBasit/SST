@@ -15,13 +15,17 @@
       </button>
       <mat-menu #Menu="matMenu" xPosition="before">
           <button mat-menu-item [matMenuTriggerFor]="AccountMenu">Account</button>
-          <button (click)="Logout()" mat-menu-item>Sign Out</button>
+          <div *ngFor="let data of menuItems">
+            <button mat-menu-item routerLink="{{data.link}}"mat-menu-item>{{data.name}}</button>
+          </div>
+          
       </mat-menu>
       <mat-menu #AccountMenu="matMenu">
-        <div *ngFor="let data of menuItems">
-          <button routerLink="{{data.link}}"mat-menu-item>{{data.name}}</button>
-        </div>  
-      </mat-menu>
+        <button routerLink="/changepassword" mat-menu-item>Change Password</button>
+        <button (click)="goToUpdate()" routerLink="/updateaccount" mat-menu-item>Update Account</button>
+        <button (click)="onDelete()" mat-menu-item>Delete Account</button>
+        <button (click)="Logout()" mat-menu-item>Sign Out</button>
+    </mat-menu>
     </div>  
        
       <!-- </div> -->
@@ -31,7 +35,11 @@
 <br>
 
 <div class="main">
-
+  <div class="mainTopButtons">
+    <button (click)="changeCrudSet()" routerLink="/adminEditStakeholder" mat-raised-button color="primary">Set Stakeholder</button>
+    <button (click)="changeCrudSet()" routerLink="/adminEditObjective" mat-raised-button color="primary">Set Objective</button>
+    <button (click)="changeCrudSet()" routerLink="/assignObjective" mat-raised-button color="primary">Set Stakeholder Objective</button>
+  </div>
   
 
 </div>

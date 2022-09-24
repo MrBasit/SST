@@ -18,6 +18,7 @@ import { UserService } from '../user.service';
 
 export class AdminMainFormComponent implements OnInit {
 
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -55,6 +56,8 @@ export class AdminMainFormComponent implements OnInit {
         this.data.paginator = this.paginator;
         this.data.sort = this.sort;
         this.menuItems.sort(this.compare);
+        let type={isCrudSet:false}
+        this.storageService.SetCrudType=type;
       }
     )
     
@@ -84,23 +87,23 @@ export class AdminMainFormComponent implements OnInit {
   }
   
 
-  onDelete(data:any){
-    console.log(data);
-    
-    let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent,{
-      data:null
+  onDelete(){
+    console.log(this.storageService.GetCurrentuesr.id);
+    let DeleteDialogRef = this.dialog.open(DeleteAccountPopupComponent, {
+      data: null
     })
-    DeleteDialogRef.afterClosed().subscribe(r=>{
-      if(r){
-        this.isLoading=true;
-        let url=GlobalComponent.apiUrl+'user/deleteaccount';
-        console.log('id: ',data.row.id);
-        this.userService.DeleteAccount(url,{id:data.row.id}).subscribe(
-          r=>{
+    DeleteDialogRef.afterClosed().subscribe(r => {
+      if (r) {
+        this.isLoading = true;
+        let url = GlobalComponent.apiUrl + 'user/deleteaccount';
+        console.log('id: ', this.CurrentUser.id);
+        this.userService.DeleteAccount(url, { id: this.CurrentUser.id }).subscribe(
+          r => {
+            this.storageService.SetCurrentUser = null;
             console.log(r),
-            this.ngOnInit();
+              this.router.navigate(['/signin'])
           },
-          e=>{
+          e => {
             console.log(e);
           }
         )
@@ -110,6 +113,16 @@ export class AdminMainFormComponent implements OnInit {
   
   onEdit(data:any){
    this.router.navigate(['/adminupdate'],{state:data});
+  }
+
+  goToUpdate(){
+
+    let type={
+      userType:'admin'
+    }
+    
+    this.storageService.SetUserType=type;
+    console.log(this.storageService.GetUserType);
   }
 
   Logout(){
@@ -139,6 +152,19 @@ export class AdminMainFormComponent implements OnInit {
     if (this.data.paginator) {
       this.data.paginator.firstPage();
     }
+  }
+
+  changeCrudSet() {
+    
+    let type={
+      isCrudSet:true
+    }
+    let user={
+      userType:'Admin'
+    }
+    this.storageService.SetUserType=user;
+    this.storageService.SetCrudType=type;
+    console.log(this.storageService.GetCrudType);
   }
 
 }

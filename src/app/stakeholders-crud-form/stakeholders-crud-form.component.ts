@@ -107,6 +107,7 @@ export class StakeholdersCrudFormComponent implements OnInit {
   
   goToAssignObjective(data:any){
       this.storageService.SetUserStakeholder = data.row;
+      this.storageService.SetUserType={userType:'User'};
       console.log(this.storageService.GetUserStakeholder);
       console.log(this.storageService.GetCurrentuesr);
       console.log(this.storageService.GetUserObjective);

@@ -32,3 +32,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
+.green-snackbar {
+    text-align: center;
+    background: green;
+    color: white;
+    
+}
+.red-snackbar {
+    background: red;
+    color: white;
+    text-align: center;
+}
+

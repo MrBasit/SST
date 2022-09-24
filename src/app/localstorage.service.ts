@@ -130,6 +130,20 @@ export class LocalstorageService {
     }
   }
 
+  public get GetCrudType() {
+    let a = localStorage.getItem('CrudType') as string;
+    return JSON.parse(a) as CrudType;
+  }
+
+  public set SetCrudType(value: any) {
+    if (value == null) {
+      localStorage.removeItem('CrudType');
+    }
+    else {
+      localStorage.setItem('CrudType', JSON.stringify(value))
+    }
+  }
+
 }
 export interface User {
   "id": number,
@@ -185,8 +199,13 @@ export interface AdminUpdateType {
   "id": string,
   "name": string,
   "description": string
+  "setId":string
 }
 
 export interface UserType{
   "userType":string
+}
+
+export interface CrudType{
+  "isCrudSet":boolean
 }

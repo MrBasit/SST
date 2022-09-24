@@ -104,7 +104,8 @@ export class ChangePasswordFormComponent implements OnInit {
           this.isLoading=false;
           if(r.responseCode==1){
             console.log(r);
-            this.router.navigate(['/main']);
+            if(this.storageService.GetUserType.userType=='admin') this.router.navigate(['/adminmain'])
+            else this.router.navigate(['/main']);
           }
           else{
             this.Error={
@@ -126,6 +127,11 @@ export class ChangePasswordFormComponent implements OnInit {
       this.isLoading=false;
     }
     console.log('form -> ',this.changePasswordForm.value);
+  }
+
+  goToMain(){
+    if(this.storageService.GetUserType.userType=='admin') this.router.navigate(['/adminmain'])
+            else this.router.navigate(['/main']);
   }
 
 }
