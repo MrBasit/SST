@@ -58,6 +58,11 @@ export class UserService {
     return this.http.get(url, options);
   }
 
+  Awake2(url: string) {
+    
+    return this.http.get(url);
+  }
+
   getAdminData(url: string) {
     this.Autorization = this.storageService.GetCurrentuesr.accessToken;
     let header = new HttpHeaders(

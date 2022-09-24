@@ -16,7 +16,7 @@ export class InitialFormComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading=true;
       let url=GlobalComponent.apiUrl+"user/get";
-      this.userService.Awake(url).subscribe(
+      this.userService.Awake2(url).subscribe(
         (r:any)=>{
           this.isLoading=false;
           console.log('r => ',r);
